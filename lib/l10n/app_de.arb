@@ -1,0 +1,13 @@
+{
+    "company": "Simplifit Solutions",
+    "app_title": "Flutter Template",
+    "generic_error_unknown_version_label": "Unbekannt",
+    "generic_warning_generic_title": "Warnung",
+    "generic_info_generic_title": "Info",
+    "generic_error_generic_title": "Error",
+    "generic_error_generic_description": "Etwas ist schief gelaufen",
+    "generic_button_okay": "Okay",
+    "generic_button_cancel": "Abbrechen",
+
+    "hallo_world": "Hallo Welt!"
+}

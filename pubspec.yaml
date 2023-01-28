@@ -1,0 +1,53 @@
+name: flutter_template
+description: A new Flutter project.
+publish_to: "none"
+version: 1.0.0+1
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  cupertino_icons: ^1.0.2
+  dio: ^4.0.6
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.1
+  flutter_localizations:
+    sdk: flutter
+  freezed_annotation: ^2.2.0
+  get_it: ^7.2.0
+  go_router: ^6.0.1
+  hive_flutter: ^1.1.0
+  intl: 0.17.0
+  logging: ^1.1.1
+  package_info_plus: ^3.0.2
+  shared_preferences: ^2.0.17
+
+dev_dependencies:
+  bloc_test: ^9.1.0
+  build_runner: ^2.3.3
+  flutter_launcher_icons: 0.11.0
+  flutter_lints: ^2.0.0
+  flutter_native_splash: 2.2.16
+  flutter_test:
+    sdk: flutter
+  freezed: ^2.3.2
+  hive_generator: ^2.0.0
+  mockito: ^5.3.2
+
+flutter_native_splash:
+  color: "#321B95"
+  android: true
+  ios: true
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - assets/image/
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/font/Roboto-Regular.ttf
+        - asset: assets/font/Roboto-Bold.ttf
+          weight: 700
