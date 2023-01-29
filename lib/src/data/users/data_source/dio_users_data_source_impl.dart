@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_template/src/data/users/model/response/get_user_response.dart';
 import 'package:logging/logging.dart';
 
 import '../../../core/extension/dio_extension.dart';
