@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '/src/core/service/popup_service/popup_service.dart';
+import '../../core/service/export.dart';
 import '/src/core/errors/export.dart';
 import '../../core/app/router/app_routes.dart';
 import '../../domain/users/export.dart';
-import '../common/export.dart';
 
 class MainScreen extends StatelessWidget {
   static const path = '/main';
@@ -28,7 +27,7 @@ class MainScreen extends StatelessWidget {
       },
       builder: (context, state) => Scaffold(
         appBar: AppBar(
-          title: const VersionLabel(),
+          title: Text(S.of(context)!.app_title),
           centerTitle: false,
           actions: [
             IconButton(
@@ -78,7 +77,7 @@ class MainScreen extends StatelessWidget {
                 title: Text(users[index].name),
                 trailing: Text(users[index].id),
                 onTap: () =>
-                    context.go('$path/${DetailScreen.path}/${users[index].id}'),
+                    context.go('$path/${UserDetailScreen.path}/${users[index].id}'),
               ),
               itemCount: users.length,
             ),

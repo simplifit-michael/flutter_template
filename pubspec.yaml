@@ -37,7 +37,7 @@ dev_dependencies:
   mockito: ^5.3.2
 
 flutter_native_splash:
-  color: "#321B95"
+  color: "#02A8AD"
   android: true
   ios: true
 
@@ -46,7 +46,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/image/
+    - assets/images/
   fonts:
     - family: Roboto
       fonts:

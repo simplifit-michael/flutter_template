@@ -36,14 +36,14 @@ class AppRouter extends GoRouter {
             builder: (context, state) => const MainScreen(),
             routes: [
               GoRoute(
-                path: '${DetailScreen.path}/:id',
+                path: '${UserDetailScreen.path}/:id',
                 builder: (context, state) {
                   final id = state.params['id'];
                   return BlocProvider(
                     create: (context) =>
                         UserDetailBloc(locator<UsersRepository>())
                           ..add(UserDetailEvent.init(id)),
-                    child: const DetailScreen(),
+                    child: const UserDetailScreen(),
                   );
                 },
               )

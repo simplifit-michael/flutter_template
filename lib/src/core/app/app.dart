@@ -24,6 +24,8 @@ class App extends StatelessWidget {
   Widget _buildSplashScreen() => MaterialApp(
         theme: AppTheme.getDefaultTheme(),
         home: const SplashScreen(),
+        localizationsDelegates: S.localizationsDelegates,
+        supportedLocales: S.supportedLocales,
       );
 
   Widget _buildApp() {
