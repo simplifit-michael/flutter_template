@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:logging/logging.dart';
 
 import '../export.dart';
+import '../../../core/errors/failures/failure.dart';
 
 part 'users_event.dart';
 part 'users_state.dart';
@@ -27,9 +28,17 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
 
   Future<void> _init(_Init event) async {
     _logger.info('Requesting Users');
-    final users = await _repo.getUsers();
-    _logger.info('Emitting Ready State with ${users.length} users');
-    emit(UsersState.ready(users: users));
+    final result = await _repo.getUsers();
+    result.fold(
+      (failureType) {
+        _logger.warning('Error during user request: ${failureType.name}');
+        emit(UsersState.error(failureType));
+      },
+      (users) {
+        _logger.info('Emitting Ready State with ${users.length} users');
+        emit(UsersState.ready(users));
+      },
+    );
   }
 
   Future<void> _reset(_Reset value) async {

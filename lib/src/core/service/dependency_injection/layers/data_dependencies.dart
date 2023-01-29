@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_template/src/core/service/app_environment/environment_variables/environment_variables.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import '../../export.dart';
 import '/src/data/users/export.dart';
 import '/src/core/factory/export.dart';
-import '../export.dart';
 
 Future<void> setupDataDependencies() async {
   await _initUsersDataSource(shouldUseHive: true);

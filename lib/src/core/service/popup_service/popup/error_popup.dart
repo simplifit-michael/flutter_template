@@ -25,7 +25,7 @@ class ErrorPopup extends StatelessWidget {
           color: Colors.transparent,
           child: Container(
             decoration: BoxDecoration(
-              color: AppColor.primary,
+              color: AppColor.cardBackground,
               borderRadius: BorderRadius.circular(AppUIConstraints.cardRadius),
             ),
             padding: const EdgeInsets.all(AppUIConstraints.cardPadding),
@@ -37,7 +37,7 @@ class ErrorPopup extends StatelessWidget {
                 Text(
                   title ?? S.of(context)!.generic_error_generic_title,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline2,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
                 Text(

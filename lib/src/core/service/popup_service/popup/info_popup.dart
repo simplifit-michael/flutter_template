@@ -24,7 +24,7 @@ class InfoPopup extends StatelessWidget {
           color: Colors.transparent,
           child: Container(
             decoration: BoxDecoration(
-              color: AppColor.primary,
+              color: AppColor.cardBackground,
               borderRadius: BorderRadius.circular(AppUIConstraints.cardRadius),
             ),
             padding: const EdgeInsets.all(AppUIConstraints.cardPadding),
@@ -36,7 +36,7 @@ class InfoPopup extends StatelessWidget {
                 Text(
                   title ?? S.of(context)!.generic_info_generic_title,
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline2,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
                 Text(

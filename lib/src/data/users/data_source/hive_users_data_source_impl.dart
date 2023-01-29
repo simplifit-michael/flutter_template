@@ -12,8 +12,11 @@ class HiveUsersDataSourceImpl extends LocalUsersDataSource {
   HiveUsersDataSourceImpl(this._hive);
 
   Future<void> init() async {
-    _hive.registerAdapter(UserModelAdapter());
-    await _hive.openBox<UserModel>(_boxName);
+    if (!_hive.isAdapterRegistered(UserModelAdapter().typeId)) {
+      _hive.registerAdapter(UserModelAdapter());
+    }
+      await _hive.openBox<UserModel>(_boxName);
+      
   }
 
   @override

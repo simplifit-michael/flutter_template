@@ -221,21 +221,21 @@ mixin _$UserDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() error,
+    required TResult Function(FailureType failure) error,
     required TResult Function(User user) ready,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? error,
+    TResult? Function(FailureType failure)? error,
     TResult? Function(User user)? ready,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? error,
+    TResult Function(FailureType failure)? error,
     TResult Function(User user)? ready,
     required TResult orElse(),
   }) =>
@@ -320,7 +320,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() error,
+    required TResult Function(FailureType failure) error,
     required TResult Function(User user) ready,
   }) {
     return initial();
@@ -330,7 +330,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? error,
+    TResult? Function(FailureType failure)? error,
     TResult? Function(User user)? ready,
   }) {
     return initial?.call();
@@ -340,7 +340,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? error,
+    TResult Function(FailureType failure)? error,
     TResult Function(User user)? ready,
     required TResult orElse(),
   }) {
@@ -393,6 +393,8 @@ abstract class _Initial implements UserDetailState {
 abstract class _$$_ErrorCopyWith<$Res> {
   factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
       __$$_ErrorCopyWithImpl<$Res>;
+  @useResult
+  $Res call({FailureType failure});
 }
 
 /// @nodoc
@@ -401,57 +403,81 @@ class __$$_ErrorCopyWithImpl<$Res>
     implements _$$_ErrorCopyWith<$Res> {
   __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? failure = null,
+  }) {
+    return _then(_$_Error(
+      null == failure
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as FailureType,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Error implements _Error {
-  const _$_Error();
+  const _$_Error(this.failure);
+
+  @override
+  final FailureType failure;
 
   @override
   String toString() {
-    return 'UserDetailState.error()';
+    return 'UserDetailState.error(failure: $failure)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Error);
+        (other.runtimeType == runtimeType &&
+            other is _$_Error &&
+            (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, failure);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() error,
+    required TResult Function(FailureType failure) error,
     required TResult Function(User user) ready,
   }) {
-    return error();
+    return error(failure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? error,
+    TResult? Function(FailureType failure)? error,
     TResult? Function(User user)? ready,
   }) {
-    return error?.call();
+    return error?.call(failure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? error,
+    TResult Function(FailureType failure)? error,
     TResult Function(User user)? ready,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(failure);
     }
     return orElse();
   }
@@ -492,7 +518,12 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements UserDetailState {
-  const factory _Error() = _$_Error;
+  const factory _Error(final FailureType failure) = _$_Error;
+
+  FailureType get failure;
+  @JsonKey(ignore: true)
+  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -568,7 +599,7 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() error,
+    required TResult Function(FailureType failure) error,
     required TResult Function(User user) ready,
   }) {
     return ready(user);
@@ -578,7 +609,7 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? error,
+    TResult? Function(FailureType failure)? error,
     TResult? Function(User user)? ready,
   }) {
     return ready?.call(user);
@@ -588,7 +619,7 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? error,
+    TResult Function(FailureType failure)? error,
     TResult Function(User user)? ready,
     required TResult orElse(),
   }) {
