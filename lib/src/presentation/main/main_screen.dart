@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/src/core/errors/failures/failure.dart';
-import 'package:flutter_template/src/core/service/popup_service/popup_service.dart';
 import 'package:go_router/go_router.dart';
 
+import '/src/core/service/popup_service/popup_service.dart';
+import '/src/core/errors/export.dart';
 import '../../core/app/router/app_routes.dart';
 import '../../domain/users/export.dart';
 import '../common/export.dart';
@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<UsersBloc, UsersState>(
       listener: (context, state) {
-        state.when(
+        state.whenOrNull(
           initial: () => PopupService.of(context)
               .displayInfo(description: 'Resetted State'),
           ready: (users) => PopupService.of(context)
@@ -40,12 +40,13 @@ class MainScreen extends StatelessWidget {
             ),
             IconButton(
               onPressed: () async {
-                final shouldContinue = await PopupService.of(context)
-                    .displayWarning(description: 'Das ist eine Warning');
+                final popupService = PopupService.of(context);
+                final shouldContinue = await popupService.displayWarning(
+                    description: 'Das ist eine Warning');
                 if (shouldContinue) {
-                  print('Accepted Warning');
+                  popupService.displayInfo(description: 'Accepted Warning');
                 } else {
-                  print('Refused Warning');
+                  popupService.displayError(description: 'Refused Warning');
                 }
               },
               icon: const Icon(Icons.warning_outlined, color: Colors.yellow),
@@ -61,30 +62,45 @@ class MainScreen extends StatelessWidget {
         ),
         body: state.when(
           initial: () => Container(),
-          error: (failureType) => Center(child: Text(failureType.name)),
-          ready: (users) => ListView.builder(
-            itemBuilder: (context, index) => ListTile(
-              leading: const Icon(Icons.person),
-              title: Text(users[index].name),
-              trailing: Text(users[index].id),
-              onTap: () =>
-                  context.go('$path/${DetailScreen.path}/${users[index].id}'),
+          loading: () =>
+              const Center(child: CircularProgressIndicator.adaptive()),
+          error: (failureType) =>
+              Center(child: Text(failureType.buildUIDescription(context))),
+          ready: (users) => RefreshIndicator(
+            onRefresh: () async {
+              final bloc = context.read<UsersBloc>();
+              bloc.add(const UsersEvent.refresh());
+              await bloc.stream.first;
+            },
+            child: ListView.builder(
+              itemBuilder: (context, index) => ListTile(
+                leading: const Icon(Icons.person),
+                title: Text(users[index].name),
+                trailing: Text(users[index].id),
+                onTap: () =>
+                    context.go('$path/${DetailScreen.path}/${users[index].id}'),
+              ),
+              itemCount: users.length,
             ),
-            itemCount: users.length,
           ),
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(
             state.when(
               initial: () => Icons.start,
+              loading: () => Icons.hourglass_top,
               error: (_) => Icons.start,
               ready: (_) => Icons.close,
             ),
           ),
-          onPressed: () => context.read<UsersBloc>().add(state.when(
-              initial: () => const UsersEvent.init(),
-              error: (_) => const UsersEvent.init(),
-              ready: (_) => const UsersEvent.reset())),
+          onPressed: () => state.when(
+              loading: () => null,
+              initial: () =>
+                  context.read<UsersBloc>().add(const UsersEvent.init()),
+              error: (_) =>
+                  context.read<UsersBloc>().add(const UsersEvent.init()),
+              ready: (_) =>
+                  context.read<UsersBloc>().add(const UsersEvent.reset())),
         ),
       ),
     );

@@ -21,10 +21,10 @@ class UsersRepositoryImpl extends UsersRepository {
         _network = network;
 
   @override
-  Future<Either<FailureType, List<User>>> getUsers() async {
+  Future<Either<FailureType, List<User>>> getUsers({bool force = false}) async {
     _logger.fine('Request users from Repo');
     List<UserModel> users = _local.getUsers();
-    if (users.isEmpty) {
+    if (users.isEmpty || force) {
       _logger.fine('No users found locally, requesting remotly');
 
       final hasConnection = await _network.hasConnection;

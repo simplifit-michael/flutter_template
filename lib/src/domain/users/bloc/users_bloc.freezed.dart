@@ -19,18 +19,21 @@ mixin _$UsersEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() refresh,
     required TResult Function() reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? refresh,
     TResult? Function()? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? refresh,
     TResult Function()? reset,
     required TResult orElse(),
   }) =>
@@ -38,18 +41,21 @@ mixin _$UsersEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Reset value) reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
+    TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Reset value)? reset,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) =>
@@ -111,6 +117,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() refresh,
     required TResult Function() reset,
   }) {
     return init();
@@ -120,6 +127,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? refresh,
     TResult? Function()? reset,
   }) {
     return init?.call();
@@ -129,6 +137,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? refresh,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -142,6 +151,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Reset value) reset,
   }) {
     return init(this);
@@ -151,6 +161,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
+    TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Reset value)? reset,
   }) {
     return init?.call(this);
@@ -160,6 +171,7 @@ class _$_Init implements _Init {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
@@ -172,6 +184,113 @@ class _$_Init implements _Init {
 
 abstract class _Init implements UsersEvent {
   const factory _Init() = _$_Init;
+}
+
+/// @nodoc
+abstract class _$$_RefreshCopyWith<$Res> {
+  factory _$$_RefreshCopyWith(
+          _$_Refresh value, $Res Function(_$_Refresh) then) =
+      __$$_RefreshCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_RefreshCopyWithImpl<$Res>
+    extends _$UsersEventCopyWithImpl<$Res, _$_Refresh>
+    implements _$$_RefreshCopyWith<$Res> {
+  __$$_RefreshCopyWithImpl(_$_Refresh _value, $Res Function(_$_Refresh) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Refresh implements _Refresh {
+  const _$_Refresh();
+
+  @override
+  String toString() {
+    return 'UsersEvent.refresh()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Refresh);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() refresh,
+    required TResult Function() reset,
+  }) {
+    return refresh();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? refresh,
+    TResult? Function()? reset,
+  }) {
+    return refresh?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? refresh,
+    TResult Function()? reset,
+    required TResult orElse(),
+  }) {
+    if (refresh != null) {
+      return refresh();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Init value) init,
+    required TResult Function(_Refresh value) refresh,
+    required TResult Function(_Reset value) reset,
+  }) {
+    return refresh(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Init value)? init,
+    TResult? Function(_Refresh value)? refresh,
+    TResult? Function(_Reset value)? reset,
+  }) {
+    return refresh?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Init value)? init,
+    TResult Function(_Refresh value)? refresh,
+    TResult Function(_Reset value)? reset,
+    required TResult orElse(),
+  }) {
+    if (refresh != null) {
+      return refresh(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Refresh implements UsersEvent {
+  const factory _Refresh() = _$_Refresh;
 }
 
 /// @nodoc
@@ -211,6 +330,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
+    required TResult Function() refresh,
     required TResult Function() reset,
   }) {
     return reset();
@@ -220,6 +340,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? init,
+    TResult? Function()? refresh,
     TResult? Function()? reset,
   }) {
     return reset?.call();
@@ -229,6 +350,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? init,
+    TResult Function()? refresh,
     TResult Function()? reset,
     required TResult orElse(),
   }) {
@@ -242,6 +364,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Init value) init,
+    required TResult Function(_Refresh value) refresh,
     required TResult Function(_Reset value) reset,
   }) {
     return reset(this);
@@ -251,6 +374,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Init value)? init,
+    TResult? Function(_Refresh value)? refresh,
     TResult? Function(_Reset value)? reset,
   }) {
     return reset?.call(this);
@@ -260,6 +384,7 @@ class _$_Reset implements _Reset {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Init value)? init,
+    TResult Function(_Refresh value)? refresh,
     TResult Function(_Reset value)? reset,
     required TResult orElse(),
   }) {
@@ -279,6 +404,7 @@ mixin _$UsersState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(List<User> users) ready,
     required TResult Function(FailureType failureType) error,
   }) =>
@@ -286,6 +412,7 @@ mixin _$UsersState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(List<User> users)? ready,
     TResult? Function(FailureType failureType)? error,
   }) =>
@@ -293,6 +420,7 @@ mixin _$UsersState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(List<User> users)? ready,
     TResult Function(FailureType failureType)? error,
     required TResult orElse(),
@@ -301,6 +429,7 @@ mixin _$UsersState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Ready value) ready,
     required TResult Function(_Error value) error,
   }) =>
@@ -308,6 +437,7 @@ mixin _$UsersState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(_Ready value)? ready,
     TResult? Function(_Error value)? error,
   }) =>
@@ -315,6 +445,7 @@ mixin _$UsersState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Ready value)? ready,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -378,6 +509,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(List<User> users) ready,
     required TResult Function(FailureType failureType) error,
   }) {
@@ -388,6 +520,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(List<User> users)? ready,
     TResult? Function(FailureType failureType)? error,
   }) {
@@ -398,6 +531,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(List<User> users)? ready,
     TResult Function(FailureType failureType)? error,
     required TResult orElse(),
@@ -412,6 +546,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Ready value) ready,
     required TResult Function(_Error value) error,
   }) {
@@ -422,6 +557,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(_Ready value)? ready,
     TResult? Function(_Error value)? error,
   }) {
@@ -432,6 +568,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Ready value)? ready,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -445,6 +582,119 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements UsersState {
   const factory _Initial() = _$_Initial;
+}
+
+/// @nodoc
+abstract class _$$_LoadingCopyWith<$Res> {
+  factory _$$_LoadingCopyWith(
+          _$_Loading value, $Res Function(_$_Loading) then) =
+      __$$_LoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LoadingCopyWithImpl<$Res>
+    extends _$UsersStateCopyWithImpl<$Res, _$_Loading>
+    implements _$$_LoadingCopyWith<$Res> {
+  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Loading implements _Loading {
+  const _$_Loading();
+
+  @override
+  String toString() {
+    return 'UsersState.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Loading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<User> users) ready,
+    required TResult Function(FailureType failureType) error,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<User> users)? ready,
+    TResult? Function(FailureType failureType)? error,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<User> users)? ready,
+    TResult Function(FailureType failureType)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Ready value) ready,
+    required TResult Function(_Error value) error,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Ready value)? ready,
+    TResult? Function(_Error value)? error,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Ready value)? ready,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements UsersState {
+  const factory _Loading() = _$_Loading;
 }
 
 /// @nodoc
@@ -516,6 +766,7 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(List<User> users) ready,
     required TResult Function(FailureType failureType) error,
   }) {
@@ -526,6 +777,7 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(List<User> users)? ready,
     TResult? Function(FailureType failureType)? error,
   }) {
@@ -536,6 +788,7 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(List<User> users)? ready,
     TResult Function(FailureType failureType)? error,
     required TResult orElse(),
@@ -550,6 +803,7 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Ready value) ready,
     required TResult Function(_Error value) error,
   }) {
@@ -560,6 +814,7 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(_Ready value)? ready,
     TResult? Function(_Error value)? error,
   }) {
@@ -570,6 +825,7 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Ready value)? ready,
     TResult Function(_Error value)? error,
     required TResult orElse(),
@@ -654,6 +910,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(List<User> users) ready,
     required TResult Function(FailureType failureType) error,
   }) {
@@ -664,6 +921,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(List<User> users)? ready,
     TResult? Function(FailureType failureType)? error,
   }) {
@@ -674,6 +932,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(List<User> users)? ready,
     TResult Function(FailureType failureType)? error,
     required TResult orElse(),
@@ -688,6 +947,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Ready value) ready,
     required TResult Function(_Error value) error,
   }) {
@@ -698,6 +958,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(_Ready value)? ready,
     TResult? Function(_Error value)? error,
   }) {
@@ -708,6 +969,7 @@ class _$_Error implements _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Ready value)? ready,
     TResult Function(_Error value)? error,
     required TResult orElse(),
