@@ -11,5 +11,5 @@ Future<void> main() async {
     statusBarColor: Colors.transparent,
   ));
 
-  runApp(const App());
+  runApp(App());
 }

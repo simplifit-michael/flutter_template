@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -7,7 +9,9 @@ import '../service/export.dart';
 import 'export.dart';
 
 class App extends StatelessWidget {
-  const App({super.key});
+  App({super.key});
+
+  final _streamController = StreamController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,7 @@ class App extends StatelessWidget {
 
   Widget _buildSplashScreen() => MaterialApp(
         theme: AppTheme.getDefaultTheme(),
-        home: const SplashScreen(),
+        home: SplashScreen(onAnimationDone: _streamController.sink),
         localizationsDelegates: S.localizationsDelegates,
         supportedLocales: S.supportedLocales,
       );
@@ -46,10 +50,10 @@ class App extends StatelessWidget {
   }
 
   Future<void> _appInit() async {
-    //Wait at least 1.2 Seconds to end Splashscreen
     await Future.wait([
       setupLocator(),
-      Future.delayed(const Duration(milliseconds: 1200)),
+      _streamController.stream.first,
     ]);
+    _streamController.close();
   }
 }

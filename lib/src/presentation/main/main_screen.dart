@@ -73,11 +73,13 @@ class MainScreen extends StatelessWidget {
             },
             child: ListView.builder(
               itemBuilder: (context, index) => ListTile(
-                leading: const Icon(Icons.person),
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(users[index].avatar),
+                ),
                 title: Text(users[index].name),
                 trailing: Text(users[index].id),
-                onTap: () =>
-                    context.go('$path/${UserDetailScreen.path}/${users[index].id}'),
+                onTap: () => context
+                    .go('$path/${UserDetailScreen.path}/${users[index].id}'),
               ),
               itemCount: users.length,
             ),

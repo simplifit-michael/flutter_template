@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import '../model/base_dio_request_model.dart';
 
@@ -17,6 +19,7 @@ extension DioExtension on Dio {
       );
 
       final response = await fetch(requestOptions);
+      if(response.data is String) return jsonDecode(response.data);
       return response.data;
     } on DioError catch (e) {
       if (e.type == DioErrorType.other) {

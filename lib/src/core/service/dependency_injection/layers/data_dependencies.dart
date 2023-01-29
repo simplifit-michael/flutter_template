@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../export.dart';
 import '/src/data/users/export.dart';
@@ -10,14 +11,20 @@ Future<void> setupDataDependencies() async {
 }
 
 Future<void> _initUsersDataSource({required bool shouldUseHive}) async {
-  final apiKey = locator<EnvironmentVariables>().apiKey;
+  final dependencies = locator<EnvironmentVariables>();
+  final apiKey = dependencies.apiKey;
+  final apiBaseUrl = dependencies.apiBaseUrl;
 
   final Dio dio = locator<DioFactory>()
-      .setBaseUrl('https://63d57869dc3c55baf428b20c.mockapi.io/')
+      .setBaseUrl(apiBaseUrl)
       .addInterceptor(DioUsersInterceptor(apiKey))
+      .addInterceptor(PrettyDioLogger(
+          request: true,
+          requestHeader: true,
+          responseBody: true,
+          responseHeader: true))
       .build();
-  locator.registerSingleton<RemoteUsersDataSource>(
-      DioUsersDataSourceImpl(dio));
+  locator.registerSingleton<RemoteUsersDataSource>(DioUsersDataSourceImpl(dio));
 
   late final LocalUsersDataSource local;
   if (shouldUseHive) {

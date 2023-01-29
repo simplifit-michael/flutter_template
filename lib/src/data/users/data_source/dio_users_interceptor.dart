@@ -4,26 +4,20 @@ class DioUsersInterceptor extends Interceptor {
   final String _apiKey;
 
   DioUsersInterceptor(this._apiKey);
-  @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
-    print(err);
-    super.onError(err, handler);
-  }
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  Future<void> onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    final apiKey = await _getApiKey();
     options.headers.addAll({
-      'x-api-key': _apiKey,
+      'authorization': 'Bearer $apiKey',
     });
-    options.queryParameters.addAll({
-      'key': _apiKey,
-    });
+    //If you need QueryParameters
+    // options.queryParameters.addAll({
+    //   'key': apiKey,
+    // });
     super.onRequest(options, handler);
   }
 
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // TODO: implement onResponse
-    super.onResponse(response, handler);
-  }
+  Future<String> _getApiKey() => Future.value(_apiKey);
 }

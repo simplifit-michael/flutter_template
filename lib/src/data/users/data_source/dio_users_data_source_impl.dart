@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_template/src/data/users/model/response/get_user_response.dart';
 import 'package:logging/logging.dart';
 
 import '../../../core/extension/dio_extension.dart';
@@ -18,13 +19,15 @@ class DioUsersDataSourceImpl extends RemoteUsersDataSource {
     const method = 'GET';
 
     try {
-      final response = await _dio.execute(route: route, method: method);
-      return response.map<UserModel>((e) => UserModel.fromJson(e)).toList();
+      final json = await _dio.execute(route: route, method: method);
+      final response = GetUsersResponse.fromJson(json);
+      return response.items;
     } on DioError catch (e) {
       throw ApiException.fromDioError(e);
     } catch (e) {
       _logger.warning(e.toString());
-      throw ApiException(code: ApiExceptionCode.invalidResponseBody, message: e.toString());
+      throw ApiException(
+          code: ApiExceptionCode.invalidResponseBody, message: e.toString());
     }
   }
 
@@ -35,10 +38,15 @@ class DioUsersDataSourceImpl extends RemoteUsersDataSource {
     const method = 'GET';
 
     try {
-      final response = await _dio.execute(route: route, method: method);
-      return UserModel.fromJson(response);
+      final json = await _dio.execute(route: route, method: method);
+      final response = GetUserResponse.fromJson(json);
+      return response.data;
     } on DioError catch (e) {
       throw ApiException.fromDioError(e);
+    } catch (e) {
+      _logger.warning(e.toString());
+      throw ApiException(
+          code: ApiExceptionCode.invalidResponseBody, message: e.toString());
     }
   }
 }
