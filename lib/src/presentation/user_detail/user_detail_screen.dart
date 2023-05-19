@@ -45,16 +45,17 @@ class UserDetailScreen extends StatelessWidget {
                   height: 100,
                   width: 100,
                   padding: const EdgeInsets.all(8),
+                  clipBehavior: Clip.hardEdge,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: CircleAvatar(
-                    backgroundImage: NetworkImage(
-                      state.map(
-                        initial: (value) => '',
-                        error: (value) => '',
-                        ready: (value) => value.user.avatar,
+                  child: state.map(
+                    initial: (value) => const Placeholder(),
+                    error: (value) => const Placeholder(),
+                    ready: (value) => CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        value.user.avatar,
                       ),
                     ),
                   ),

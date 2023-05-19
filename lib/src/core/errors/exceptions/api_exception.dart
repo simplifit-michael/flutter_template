@@ -1,44 +1,59 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_template/src/core/errors/exceptions/data_layer_exception.dart';
 
-class ApiExceptionCode {
-  ApiExceptionCode._();
-
-  static const int noInternet = -1;
-  static const int unknown = -2;
-  static const int invalidResponseBody = -3;
-
-}
-
-enum ApiExceptionDetail {
-  connectTimeout,
-  sendTimeout,
-  receiveTimeout,
-  cancel,
-}
-
-extension ApiExceptionDetailExtension on ApiExceptionDetail {
-  static ApiExceptionDetail? fromString(String value) {
-    for (var item in ApiExceptionDetail.values) {
-      if (item.name == value.toLowerCase()) return item;
-    }
-    return null;
-  }
-}
-
-class ApiException implements Exception {
-  final int code;
-  final ApiExceptionDetail? detail;
-  final String message;
-
-  ApiException({required this.code, required this.message, this.detail});
+class ApiException extends DataLayerException implements Exception {
+  ApiException({
+    required super.code,
+    required super.message,
+    required super.stackTrace,
+    super.error,
+  });
 
   ApiException.noInternet()
-      : code = ApiExceptionCode.noInternet,
-        message = 'No internet connection',
-        detail = null;
+      : super(
+          code: DataLayerExceptionCode.noInternet,
+          message: 'No internet connection',
+          stackTrace: StackTrace.current,
+        );
+
+  ApiException.serviceDown()
+      : super(
+          code: DataLayerExceptionCode.serviceDown,
+          message: 'API Service down',
+          stackTrace: StackTrace.current,
+        );
 
   ApiException.fromDioError(DioError dioError)
-      : code = dioError.response?.statusCode ?? ApiExceptionCode.unknown,
-        message = dioError.message,
-        detail = ApiExceptionDetailExtension.fromString(dioError.type.name);
+      : super(
+          code: _getCode(dioError),
+          error: dioError.error,
+          message: dioError.message,
+          stackTrace: StackTrace.current,
+        );
+
+  @override
+  String toString() {
+    return '[$ApiException (code: $code, message: $message, error: $error, stackTrace: $stackTrace)]';
+  }
+
+  static DataLayerExceptionCode _getCode(DioError dioError) {
+    switch (dioError.type) {
+      case DioErrorType.connectionTimeout:
+        return DataLayerExceptionCode.connectTimeout;
+      case DioErrorType.sendTimeout:
+        return DataLayerExceptionCode.sendTimeout;
+      case DioErrorType.receiveTimeout:
+        return DataLayerExceptionCode.receiveTimeout;
+      case DioErrorType.badResponse:
+        return DataLayerExceptionCodeExtension.fromResponseCode(dioError.response?.statusCode);
+      case DioErrorType.cancel:
+        return DataLayerExceptionCode.cancel;
+      case DioErrorType.unknown:
+        return DataLayerExceptionCodeExtension.fromException(dioError.error);
+      case DioErrorType.badCertificate:
+        return DataLayerExceptionCode.badCertificate;
+      case DioErrorType.connectionError:
+        return DataLayerExceptionCode.connectionError;
+    }
+  }
 }

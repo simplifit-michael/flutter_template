@@ -23,4 +23,8 @@ extension DateOperations on DateTime {
 
   static DateTime fromBackendDate(String value) =>
       DateFormat('yyyy-MM-dd').parse(value);
+
+  static DateTime fromDisplayString(String value) {
+    return DateFormat('dd.MM.yyyy').parse(value);
+  }
 }

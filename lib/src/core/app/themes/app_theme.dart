@@ -11,8 +11,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColorScheme.colorScheme.background,
       dialogBackgroundColor: AppColorScheme.colorScheme.secondary,
       cardColor: AppColorScheme.colorScheme.secondary,
-      // ignore: deprecated_member_use
-      accentColor: AppColorScheme.colorScheme.primary,
+      primaryColor: AppColorScheme.colorScheme.primary,
       textTheme: AppTextTheme.textTheme,
       elevatedButtonTheme: AppButtonTheme.elevatedButtonTheme,
       floatingActionButtonTheme: AppButtonTheme.floatingActionButtonTheme,

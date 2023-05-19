@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -21,10 +23,8 @@ class PopupService {
           builder: (context) => WarningPopup(
             title: title ?? S.of(context)!.generic_warning_generic_title,
             description: description,
-            positiveButtonLabel:
-                positiveButtonLabel ?? S.of(context)!.generic_button_okay,
-            negativeButtonLabel:
-                negativeButtonLabel ?? S.of(context)!.generic_button_cancel,
+            positiveButtonLabel: positiveButtonLabel ?? S.of(context)!.generic_button_okay,
+            negativeButtonLabel: negativeButtonLabel ?? S.of(context)!.generic_button_cancel,
           ),
         ) ??
         false;
@@ -55,6 +55,7 @@ class PopupService {
     String? description,
     String? buttonLabel,
     bool isDismissable = false,
+    FutureOr<void> Function()? onConfirm,
   }) async {
     await showDialog(
       context: context,
@@ -62,10 +63,10 @@ class PopupService {
       builder: (context) => ErrorPopup(
         onSubmit: () => Navigator.pop(context),
         title: title,
-        description:
-            description,
+        description: description,
         buttonLabel: buttonLabel,
       ),
     );
+    onConfirm?.call();
   }
 }

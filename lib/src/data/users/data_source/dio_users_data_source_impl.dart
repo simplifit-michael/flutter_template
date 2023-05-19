@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_template/src/core/errors/exceptions/data_layer_exception.dart';
 import 'package:logging/logging.dart';
 
 import '../../../core/extension/dio_extension.dart';
@@ -26,7 +27,10 @@ class DioUsersDataSourceImpl extends RemoteUsersDataSource {
     } catch (e) {
       _logger.warning(e.toString());
       throw ApiException(
-          code: ApiExceptionCode.invalidResponseBody, message: e.toString());
+        code: DataLayerExceptionCode.invalidResponseBody,
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 
@@ -45,7 +49,10 @@ class DioUsersDataSourceImpl extends RemoteUsersDataSource {
     } catch (e) {
       _logger.warning(e.toString());
       throw ApiException(
-          code: ApiExceptionCode.invalidResponseBody, message: e.toString());
+        code: DataLayerExceptionCode.invalidResponseBody,
+        stackTrace: StackTrace.current,
+        message: e.toString(),
+      );
     }
   }
 }

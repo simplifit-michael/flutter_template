@@ -30,7 +30,7 @@ class UsersRepositoryImpl extends UsersRepository {
       final hasConnection = await _network.hasConnection;
       if (!hasConnection) {
         _logger.warning('No internet connection');
-        return const Left(FailureType.noInternetConnection);
+        return const Left(FailureType.noInternet);
       }
 
       try {
@@ -54,7 +54,7 @@ class UsersRepositoryImpl extends UsersRepository {
       final hasConnection = await _network.hasConnection;
       if (!hasConnection) {
         _logger.warning('No internet connection');
-        return const Left(FailureType.noInternetConnection);
+        return const Left(FailureType.noInternet);
       }
 
       try {

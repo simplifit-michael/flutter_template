@@ -26,7 +26,7 @@ class UserDetailBloc extends Bloc<UserDetailEvent, UserDetailState> {
     final id = event.id;
     if (id == null) {
       _logger.warning('Id is null');
-      emit(const UserDetailState.error(FailureType.badRequest));
+      emit(const UserDetailState.error(FailureType.invalidDataSent));
       return;
     }
 

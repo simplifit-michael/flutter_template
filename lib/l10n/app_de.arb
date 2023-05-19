@@ -8,6 +8,13 @@
     "generic_error_generic_description": "Etwas ist schief gelaufen",
     "generic_button_okay": "Okay",
     "generic_button_cancel": "Abbrechen",
+    "generic_button_yes": "Ja",
+    "generic_button_no": "Nein",
+    "general_error_no_internet_description": "Prüfe deine Internetverbindung",
+    "general_error_missing_required_input_description": "Es fehlen Eingaben",
 
-    "hallo_world": "Hallo Welt!"
+    "example_warning_description":"Das ist eine Warnung",
+    "example_info_warning_accepted_description": "Warnung wurde akzeptiert",
+    "example_error_warning_refused_description": "Warnung wurde abgelehnt",
+    "example_info_users_fetched_description": "Es wurden {userCount} Nutzer geladen"
 }

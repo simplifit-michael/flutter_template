@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_template/src/domain/app_state/cubit/app_state_cubit.dart';
 
 import '../../domain/users/export.dart';
 import '../../presentation/splash/splash_screen.dart';
@@ -36,6 +37,7 @@ class App extends StatelessWidget {
     final router = locator<AppRouter>();
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (_) => AppStateCubit()),
         BlocProvider(create: (_) => UsersBloc(repo: locator()))
       ], //TODO: Add persistent Blocs here!
       child: MaterialApp.router(
