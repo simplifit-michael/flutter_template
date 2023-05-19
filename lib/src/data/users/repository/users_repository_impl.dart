@@ -1,16 +1,15 @@
 import 'package:dartz/dartz.dart';
-import 'package:logging/logging.dart';
+import 'package:flutter_template/src/core/errors/exceptions/data_layer_exception.dart';
+import 'package:flutter_template/src/data/base_repository.dart';
 
 import '../../../core/service/export.dart';
 import '../../../core/errors/export.dart';
 import '../export.dart';
 import '/src/domain/users/export.dart';
 
-class UsersRepositoryImpl extends UsersRepository {
-  final _logger = Logger('$UsersRepositoryImpl');
+class UsersRepositoryImpl extends BaseRepository implements UsersRepository {
   final LocalUsersDataSource _local;
   final RemoteUsersDataSource _remote;
-  final NetworkService _network;
 
   UsersRepositoryImpl({
     required LocalUsersDataSource local,
@@ -18,53 +17,21 @@ class UsersRepositoryImpl extends UsersRepository {
     required NetworkService network,
   })  : _local = local,
         _remote = remote,
-        _network = network;
+        super(network);
 
   @override
-  Future<Either<FailureType, List<User>>> getUsers({bool force = false}) async {
-    _logger.fine('Request users from Repo');
-    List<UserModel> users = _local.getUsers();
-    if (users.isEmpty || force) {
-      _logger.fine('No users found locally, requesting remotly');
-
-      final hasConnection = await _network.hasConnection;
-      if (!hasConnection) {
-        _logger.warning('No internet connection');
-        return const Left(FailureType.noInternet);
-      }
-
-      try {
-        users = await _remote.getUsers();
-      } on Exception catch (e) {
-        return Left(FailureTypeExtension.fromException(e));
-      }
-      _local.setUsers(users);
-    }
-    _logger.fine('Returning ${users.length} users');
-    return Right(users.map((e) => e.toDomain()).toList());
-  }
+  Future<Either<FailureType, List<User>>> getUsers({bool force = false}) => getList(
+      localGet: _local.getUsers,
+      localSet: _local.setUsers,
+      remoteGet: _remote.getUsers,
+      force: force,
+      expectedErrors: [DataLayerExceptionCode.noContent]);
 
   @override
-  Future<Either<FailureType, User>> getUser(String id) async {
-    _logger.fine('Request user $id from Repo');
-    UserModel? user = _local.getUser(id);
-    if (user == null) {
-      _logger.fine('User not found locally, requesting remotly');
-
-      final hasConnection = await _network.hasConnection;
-      if (!hasConnection) {
-        _logger.warning('No internet connection');
-        return const Left(FailureType.noInternet);
-      }
-
-      try {
-        user = await _remote.getUser(id);
-      } on Exception catch (e) {
-        return Left(FailureTypeExtension.fromException(e));
-      }
-      _local.addUser(user);
-    }
-    _logger.fine('Returning user $id');
-    return Right(user.toDomain());
-  }
+  Future<Either<FailureType, User>> getUser(String id) => get(
+        localGet: () => _local.getUser(id),
+        localSet: (_) {},
+        remoteGet: () => _remote.getUser(id),
+        expectedErrors: [DataLayerExceptionCode.noContent],
+      );
 }
