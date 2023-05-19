@@ -1,6 +1,6 @@
 import 'dart:io';
 
-abstract class DataLayerException with Exception {
+abstract class DataLayerException implements Exception {
   final DataLayerExceptionCode code;
   final String? message;
   final dynamic error;
