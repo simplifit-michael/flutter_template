@@ -61,7 +61,8 @@ abstract class BaseRepository {
     try {
       if (!force) _logger.fine('Requesting local List<$TModel>');
       List<TModel> model = force ? [] : await localGet();
-      if (model.isEmpty || !(isLocalModelValid?.call(model) ?? false)) {
+      final isModelInvalid = !(isLocalModelValid?.call(model) ?? true);
+      if (model.isEmpty || isModelInvalid) {
         if (!(await _network.hasConnection)) return const Left(FailureType.noInternet);
 
         _logger.fine('Requesting remote List<$TModel>');

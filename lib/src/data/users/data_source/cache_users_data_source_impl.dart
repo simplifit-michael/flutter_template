@@ -36,4 +36,7 @@ class CacheUsersDataSourceImpl extends LocalUsersDataSource {
       return null;
     }
   }
+
+  @override
+  Future<void> clear() async => _users.clear();
 }

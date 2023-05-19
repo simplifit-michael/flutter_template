@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class DioFactory {
   final Dio _dio;
@@ -14,6 +15,13 @@ class DioFactory {
 
   DioFactory addInterceptor(Interceptor interceptor) {
     _dio.interceptors.add(interceptor);
+    return this;
+  }
+
+  DioFactory addDebugInterceptor(Interceptor interceptor) {
+    if (kDebugMode) {
+      _dio.interceptors.add(interceptor);
+    }
     return this;
   }
 }

@@ -3,9 +3,11 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:developer' as developer;
 
-import '/src/core/app/export.dart';
+import 'src/core/app/export.dart';
+import 'src/core/service/bloc_observer/custom_bloc_observer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +17,8 @@ Future<void> main() async {
     await Firebase.initializeApp();
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
   } catch (_) {}
+
+  Bloc.observer = CustomBlocObserver();
 
   FlutterError.onError = (details) => _onError(details);
 

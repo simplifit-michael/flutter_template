@@ -34,4 +34,14 @@ class UsersRepositoryImpl extends BaseRepository implements UsersRepository {
         remoteGet: () => _remote.getUser(id),
         expectedErrors: [DataLayerExceptionCode.noContent],
       );
+
+  @override
+  Future<Either<FailureType, void>> clear() async {
+    try {
+      await _local.clear();
+      return const Right(null);
+    } on Exception catch (e) {
+      return Left(FailureTypeExtension.fromException(e));
+    }
+  }
 }

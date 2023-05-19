@@ -15,8 +15,7 @@ class HiveUsersDataSourceImpl extends LocalUsersDataSource {
     if (!_hive.isAdapterRegistered(UserModelAdapter().typeId)) {
       _hive.registerAdapter(UserModelAdapter());
     }
-      await _hive.openBox<UserModel>(_boxName);
-      
+    await _hive.openBox<UserModel>(_boxName);
   }
 
   @override
@@ -49,4 +48,7 @@ class HiveUsersDataSourceImpl extends LocalUsersDataSource {
     }
     return user;
   }
+
+  @override
+  Future<void> clear() => _box.clear();
 }
