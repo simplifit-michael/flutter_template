@@ -27,7 +27,6 @@ class UserDetailScreen extends StatelessWidget {
                         child: Text(
                           state.map(
                             initial: (value) => 'LOADING',
-                            error: (value) => 'ERROR',
                             ready: (value) => value.user.name,
                           ),
                         ),
@@ -52,7 +51,6 @@ class UserDetailScreen extends StatelessWidget {
                   ),
                   child: state.map(
                     initial: (value) => const Placeholder(),
-                    error: (value) => const Placeholder(),
                     ready: (value) => CircleAvatar(
                       backgroundImage: NetworkImage(
                         value.user.avatar,

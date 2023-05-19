@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_template/src/core/service/export.dart';
 import 'dart:developer' as developer;
 
 import 'src/core/app/export.dart';
@@ -17,10 +18,10 @@ Future<void> main() async {
     await Firebase.initializeApp();
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
   } catch (_) {}
-
   Bloc.observer = CustomBlocObserver();
-
   FlutterError.onError = (details) => _onError(details);
+
+  await setupLocator();
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.black,

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/src/domain/app_state/cubit/app_state_cubit.dart';
-import 'package:flutter_template/src/core/service/popup_service/export.dart';
+import 'package:flutter_template/src/domain/app_state/cubit/app_state_bloc.dart';
 import 'package:flutter_template/src/presentation/app_state/popup/loading_popup.dart';
-import 'package:flutter_template/src/presentation/app_state/user_feedback/error_feedback.dart';
-import 'package:flutter_template/src/presentation/app_state/user_feedback/info_feedback.dart';
+import 'package:flutter_template/src/presentation/app_state/user_feedback/error_feedback_translation.dart';
+import 'package:flutter_template/src/presentation/app_state/user_feedback/info_feedback_translation.dart';
+
+import 'popup_service.dart';
 
 class AppStateHandler extends StatefulWidget {
   final Widget child;

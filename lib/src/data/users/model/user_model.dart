@@ -1,17 +1,10 @@
 import 'package:flutter_template/src/data/base_model.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 import '/src/domain/users/export.dart';
 
-part 'user_model.g.dart';
-
-@HiveType(typeId: 0)
 class UserModel implements BaseModel<User> {
-  @HiveField(0)
   final String id;
-  @HiveField(1)
   final String name;
-  @HiveField(2)
   final String avatar;
 
   const UserModel({

@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_template/src/core/service/export.dart';
+import 'package:flutter_template/src/domain/app_state/entity/info_feedback.dart';
 
-enum InfoFeedback {
-  example,
-  exampleWarningAccepted,
-  exampleResettedUsers,
-  exampleUsersFetched,
-}
-
-extension InfoFeedbackExtension on InfoFeedback {
+extension InfoFeedbackTranslation on InfoFeedback {
   String getTitle(BuildContext context) {
     switch (this) {
       default:

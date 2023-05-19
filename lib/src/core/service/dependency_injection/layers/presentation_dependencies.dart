@@ -1,3 +1,5 @@
+import 'package:flutter_template/src/domain/auth/bloc/auth_bloc.dart';
+
 import '../../../app/export.dart';
 import '../export.dart';
 
@@ -6,5 +8,5 @@ Future<void> setupPresentationDependencies() async {
 }
 
 void _setupAppRouter() {
-  locator.registerSingleton(AppRouter());
+  locator.registerLazySingleton(() => AppRouter(locator<AuthBloc>()));
 }

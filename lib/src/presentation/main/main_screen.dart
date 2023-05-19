@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/src/domain/app_state/cubit/app_state_cubit.dart';
-import 'package:flutter_template/src/core/service/popup_service/popup_service.dart';
+import 'package:flutter_template/src/domain/app_state/cubit/app_state_bloc.dart';
+import 'package:flutter_template/src/domain/auth/bloc/auth_bloc.dart';
+import 'package:flutter_template/src/presentation/app_state/popup_service.dart';
+import 'package:flutter_template/src/domain/app_state/entity/error_feedback.dart';
+import 'package:flutter_template/src/domain/app_state/entity/info_feedback.dart';
 import 'package:flutter_template/src/presentation/app_state/app_state_handler.dart';
-import 'package:flutter_template/src/presentation/app_state/user_feedback/error_feedback.dart';
-import 'package:flutter_template/src/presentation/app_state/user_feedback/info_feedback.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/service/export.dart';
@@ -21,24 +22,31 @@ class MainScreen extends StatelessWidget {
     return AppStateHandler(
       child: BlocConsumer<UsersBloc, UsersState>(
         listener: (context, state) {
+          final authState = context.read<AuthBloc>().state;
+          if (!authState.isLoggedIn) return;
           state.whenOrNull(
-            initial: () => context.read<AppStateCubit>().setInfo(info: InfoFeedback.exampleResettedUsers),
-            ready: (users) => context.read<AppStateCubit>().setInfo(
-              info: InfoFeedback.exampleUsersFetched,
-              namedArgs: {"userCount": users.length},
-            ),
-            error: (failure) =>
-                context.read<AppStateCubit>().setError(error: ErrorFeedbackExtension.fromFailure(failure)),
+            initial: () =>
+                context.read<AppStateCubit>().add(const AppStateEvent.setInfo(info: InfoFeedback.exampleResettedUsers)),
+            ready: (users) => context.read<AppStateCubit>().add(
+                  AppStateEvent.setInfo(
+                    info: InfoFeedback.exampleUsersFetched,
+                    namedArgs: {"userCount": users.length},
+                  ),
+                ),
           );
         },
         builder: (context, state) => Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () => context.read<AuthBloc>().add(const AuthEvent.signOut()),
+            ),
             title: Text(S.of(context)!.app_title),
             centerTitle: false,
             actions: [
               IconButton(
                 onPressed: () {
-                  context.read<AppStateCubit>().setInfo(info: InfoFeedback.example);
+                  context.read<AppStateCubit>().add(const AppStateEvent.setInfo(info: InfoFeedback.example));
                 },
                 icon: const Icon(Icons.info_outline, color: Colors.white),
               ),
@@ -53,16 +61,16 @@ class MainScreen extends StatelessWidget {
                     negativeButtonLabel: translator.generic_button_no,
                   );
                   if (shouldContinue) {
-                    appState.setInfo(info: InfoFeedback.exampleWarningAccepted);
+                    appState.add(const AppStateEvent.setInfo(info: InfoFeedback.exampleWarningAccepted));
                   } else {
-                    appState.setError(error: ErrorFeedback.exampleWarningRefused);
+                    appState.add(const AppStateEvent.setError(error: ErrorFeedback.exampleWarningRefused));
                   }
                 },
                 icon: const Icon(Icons.warning_outlined, color: Colors.yellow),
               ),
               IconButton(
                 onPressed: () {
-                  context.read<AppStateCubit>().setError(error: ErrorFeedback.unknown);
+                  context.read<AppStateCubit>().add(const AppStateEvent.setError(error: ErrorFeedback.unknown));
                 },
                 icon: const Icon(Icons.error_outline, color: Colors.red),
               ),
@@ -71,9 +79,6 @@ class MainScreen extends StatelessWidget {
           body: state.when(
             initial: () => Container(),
             loading: () => const Center(child: CircularProgressIndicator.adaptive()),
-            error: (failureType) => Center(
-              child: Text(ErrorFeedbackExtension.fromFailure(failureType).getDescription(context)),
-            ),
             ready: (users) => RefreshIndicator(
               onRefresh: () async {
                 final bloc = context.read<UsersBloc>();
@@ -98,14 +103,12 @@ class MainScreen extends StatelessWidget {
               state.when(
                 initial: () => Icons.start,
                 loading: () => Icons.hourglass_top,
-                error: (_) => Icons.start,
                 ready: (_) => Icons.close,
               ),
             ),
             onPressed: () => state.when(
                 loading: () => null,
                 initial: () => context.read<UsersBloc>().add(const UsersEvent.init()),
-                error: (_) => context.read<UsersBloc>().add(const UsersEvent.init()),
                 ready: (_) => context.read<UsersBloc>().add(const UsersEvent.reset())),
           ),
         ),

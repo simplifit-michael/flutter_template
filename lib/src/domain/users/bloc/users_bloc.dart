@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_template/src/domain/app_state/cubit/app_state_bloc.dart';
+import 'package:flutter_template/src/domain/app_state/entity/error_feedback.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../export.dart';
-import '../../../core/errors/failures/failure.dart';
 
 part 'users_event.dart';
 part 'users_state.dart';
@@ -10,9 +11,11 @@ part 'users_bloc.freezed.dart';
 
 class UsersBloc extends Bloc<UsersEvent, UsersState> {
   final UsersRepository _repo;
+  final AppStateCubit _app;
 
-  UsersBloc({required UsersRepository repo})
+  UsersBloc({required UsersRepository repo, required AppStateCubit app})
       : _repo = repo,
+        _app = app,
         super(const _Initial()) {
     on<UsersEvent>((event, emit) async {
       await event.map(
@@ -28,7 +31,7 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     final result = await _repo.getUsers();
     result.fold(
       (failureType) {
-        emit(UsersState.error(failureType));
+        _app.add(AppStateEvent.setError(error: ErrorFeedbackBuilder.fromFailure(failureType)));
       },
       (users) {
         emit(UsersState.ready(users));
@@ -46,7 +49,7 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     final result = await _repo.getUsers(force: true);
     result.fold(
       (failureType) {
-        emit(UsersState.error(failureType));
+        _app.add(AppStateEvent.setError(error: ErrorFeedbackBuilder.fromFailure(failureType)));
       },
       (users) {
         emit(UsersState.ready(users));

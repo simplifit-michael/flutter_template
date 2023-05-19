@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/src/domain/app_state/cubit/app_state_cubit.dart';
+import 'package:flutter_template/src/domain/app_state/cubit/app_state_bloc.dart';
+import 'package:flutter_template/src/domain/auth/bloc/auth_bloc.dart';
 
 import '../../domain/users/export.dart';
 import '../../presentation/splash/splash_screen.dart';
@@ -10,7 +11,9 @@ import '../service/export.dart';
 import 'export.dart';
 
 class App extends StatelessWidget {
-  App({super.key});
+  App({super.key}) {
+    locator<AuthBloc>().stream.listen(_onAuthStateChanged);
+  }
 
   final _streamController = StreamController();
 
@@ -35,10 +38,12 @@ class App extends StatelessWidget {
 
   Widget _buildApp() {
     final router = locator<AppRouter>();
+
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => AppStateCubit()),
-        BlocProvider(create: (_) => UsersBloc(repo: locator()))
+        BlocProvider.value(value: locator<AppStateCubit>()),
+        BlocProvider(create: (_) => locator<UsersBloc>()),
+        BlocProvider(create: (_) => locator<AuthBloc>())
       ], //TODO: Add persistent Blocs here!
       child: MaterialApp.router(
         theme: AppTheme.getDefaultTheme(),
@@ -52,10 +57,11 @@ class App extends StatelessWidget {
   }
 
   Future<void> _appInit() async {
-    await Future.wait([
-      setupLocator(),
-      _streamController.stream.first,
-    ]);
+    await _streamController.stream.first;
     _streamController.close();
+  }
+
+  void _onAuthStateChanged(AuthState state) {
+    state.whenOrNull(initial: () => locator<UsersBloc>().add(const UsersEvent.reset()));
   }
 }

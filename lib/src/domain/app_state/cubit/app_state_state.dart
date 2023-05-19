@@ -1,4 +1,4 @@
-part of 'app_state_cubit.dart';
+part of 'app_state_bloc.dart';
 
 @freezed
 class AppStateState with _$AppStateState {

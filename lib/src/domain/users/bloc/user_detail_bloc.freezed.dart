@@ -221,21 +221,18 @@ mixin _$UserDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(FailureType failure) error,
     required TResult Function(User user) ready,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(FailureType failure)? error,
     TResult? Function(User user)? ready,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(FailureType failure)? error,
     TResult Function(User user)? ready,
     required TResult orElse(),
   }) =>
@@ -243,21 +240,18 @@ mixin _$UserDetailState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
     required TResult Function(_Ready value) ready,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Error value)? error,
     TResult? Function(_Ready value)? ready,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
     TResult Function(_Ready value)? ready,
     required TResult orElse(),
   }) =>
@@ -320,7 +314,6 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(FailureType failure) error,
     required TResult Function(User user) ready,
   }) {
     return initial();
@@ -330,7 +323,6 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(FailureType failure)? error,
     TResult? Function(User user)? ready,
   }) {
     return initial?.call();
@@ -340,7 +332,6 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(FailureType failure)? error,
     TResult Function(User user)? ready,
     required TResult orElse(),
   }) {
@@ -354,7 +345,6 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
     required TResult Function(_Ready value) ready,
   }) {
     return initial(this);
@@ -364,7 +354,6 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Error value)? error,
     TResult? Function(_Ready value)? ready,
   }) {
     return initial?.call(this);
@@ -374,7 +363,6 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
     TResult Function(_Ready value)? ready,
     required TResult orElse(),
   }) {
@@ -387,143 +375,6 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements UserDetailState {
   const factory _Initial() = _$_Initial;
-}
-
-/// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
-  @useResult
-  $Res call({FailureType failure});
-}
-
-/// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$UserDetailStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? failure = null,
-  }) {
-    return _then(_$_Error(
-      null == failure
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
-              as FailureType,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Error implements _Error {
-  const _$_Error(this.failure);
-
-  @override
-  final FailureType failure;
-
-  @override
-  String toString() {
-    return 'UserDetailState.error(failure: $failure)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Error &&
-            (identical(other.failure, failure) || other.failure == failure));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, failure);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(FailureType failure) error,
-    required TResult Function(User user) ready,
-  }) {
-    return error(failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(FailureType failure)? error,
-    TResult? Function(User user)? ready,
-  }) {
-    return error?.call(failure);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(FailureType failure)? error,
-    TResult Function(User user)? ready,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(failure);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
-    required TResult Function(_Ready value) ready,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(_Error value)? error,
-    TResult? Function(_Ready value)? ready,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
-    TResult Function(_Ready value)? ready,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Error implements UserDetailState {
-  const factory _Error(final FailureType failure) = _$_Error;
-
-  FailureType get failure;
-  @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -599,7 +450,6 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(FailureType failure) error,
     required TResult Function(User user) ready,
   }) {
     return ready(user);
@@ -609,7 +459,6 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(FailureType failure)? error,
     TResult? Function(User user)? ready,
   }) {
     return ready?.call(user);
@@ -619,7 +468,6 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(FailureType failure)? error,
     TResult Function(User user)? ready,
     required TResult orElse(),
   }) {
@@ -633,7 +481,6 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
-    required TResult Function(_Error value) error,
     required TResult Function(_Ready value) ready,
   }) {
     return ready(this);
@@ -643,7 +490,6 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
-    TResult? Function(_Error value)? error,
     TResult? Function(_Ready value)? ready,
   }) {
     return ready?.call(this);
@@ -653,7 +499,6 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
-    TResult Function(_Error value)? error,
     TResult Function(_Ready value)? ready,
     required TResult orElse(),
   }) {
