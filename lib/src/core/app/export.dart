@@ -1,6 +1,5 @@
 export 'assets/image_asset.dart';
 export 'router/app_router.dart';
-export 'router/app_routes.dart';
 export 'styles/app_color.dart';
 export 'styles/app_font.dart';
 export 'styles/app_size.dart';

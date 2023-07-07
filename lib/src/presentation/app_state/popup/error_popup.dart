@@ -1,16 +1,22 @@
+import 'package:flutter_template/src/core/service/l18n.dart';
+import 'package:flutter_template/src/domain/app_state/cubit/app_state_cubit.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/app/export.dart';
-import '../../../core/service/export.dart';
+import 'package:flutter_template/src/core/app/export.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ErrorPopup extends StatelessWidget {
-  final String? title;
-  final String? description;
-  final String? buttonLabel;
-  final VoidCallback onSubmit;
-
-  const ErrorPopup(
-      {super.key, required this.title, required this.description, required this.buttonLabel, required this.onSubmit});
+  const ErrorPopup({
+    this.captionKey,
+    this.descriptionKey,
+    this.buttonKey,
+    this.namedArgs,
+    super.key,
+  });
+  final String? captionKey;
+  final String? descriptionKey;
+  final String? buttonKey;
+  final Map<String, String>? namedArgs;
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +37,24 @@ class ErrorPopup extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  title ?? S.of(context)!.generic_error_generic_title,
+                  captionKey?.tr() ?? LocaleKeys.generalErrorCaption.tr(),
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
                 Text(
-                  description ?? S.of(context)!.generic_error_generic_description,
+                  descriptionKey?.tr(namedArgs: namedArgs) ?? LocaleKeys.generalErrorDescription.tr(),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
                 ElevatedButton(
-                  onPressed: onSubmit,
-                  child: Text(buttonLabel ?? S.of(context)!.generic_button_okay),
+                  onPressed: () {
+                    context.read<AppStateCubit>().reset();
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    buttonKey?.tr() ?? LocaleKeys.generalButtonOkay.tr(),
+                  ),
                 ),
               ],
             ),

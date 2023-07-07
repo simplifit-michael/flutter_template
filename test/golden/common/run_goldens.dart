@@ -1,8 +1,9 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter_template/src/core/app/export.dart';
+import 'package:flutter_template/src/core/app/app.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
+import 'package:network_image_mock/network_image_mock.dart';
 
 import 'setup_test_locator.dart';
 
@@ -31,8 +32,7 @@ Future<void> runGoldenTest(
   for (var flow in flows.entries) {
     print("Starting flow $flowIndex: ${flow.key}");
     await flow.value(tester);
-    await tester.pumpAndSettle();
-
+    await mockNetworkImagesFor(() => tester.pumpAndSettle());
     await multiScreenGolden(
       tester,
       _getTestName(

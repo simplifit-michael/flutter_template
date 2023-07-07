@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_template/src/core/errors/exceptions/data_layer_exception.dart';
+import 'package:dio/dio.dart';
 
 class ApiException extends DataLayerException implements Exception {
   ApiException({

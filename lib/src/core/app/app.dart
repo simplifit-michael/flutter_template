@@ -1,67 +1,40 @@
-import 'dart:async';
-
+import 'package:flutter_template/src/core/app/export.dart';
+import 'package:flutter_template/src/domain/app_state/cubit/app_state_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/src/domain/app_state/cubit/app_state_bloc.dart';
-import 'package:flutter_template/src/domain/auth/bloc/auth_bloc.dart';
+import 'package:flutter_translaty/flutter_translaty.dart';
 
-import '../../domain/users/export.dart';
-import '../../presentation/splash/splash_screen.dart';
-import '../service/export.dart';
-import 'export.dart';
+import '../service/dependency_injection/export.dart';
 
 class App extends StatelessWidget {
-  App({super.key}) {
-    locator<AuthBloc>().stream.listen(_onAuthStateChanged);
-  }
-
-  final _streamController = StreamController();
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
-        future: _appInit(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return _buildSplashScreen();
-          }
-          return _buildApp();
-        });
-  }
-
-  Widget _buildSplashScreen() => MaterialApp(
-        theme: AppTheme.getDefaultTheme(),
-        home: SplashScreen(onAnimationDone: _streamController.sink),
-        localizationsDelegates: S.localizationsDelegates,
-        supportedLocales: S.supportedLocales,
-      );
-
-  Widget _buildApp() {
     final router = locator<AppRouter>();
 
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider.value(value: locator<AppStateCubit>()),
-        BlocProvider(create: (_) => locator<UsersBloc>()),
-        BlocProvider(create: (_) => locator<AuthBloc>())
-      ], //TODO: Add persistent Blocs here!
-      child: MaterialApp.router(
-        theme: AppTheme.getDefaultTheme(),
-        routeInformationParser: router.routeInformationParser,
-        routerDelegate: router.routerDelegate,
-        routeInformationProvider: router.routeInformationProvider,
-        localizationsDelegates: S.localizationsDelegates,
-        supportedLocales: S.supportedLocales,
+    return EasyLocalization(
+      supportedLocales: const [Locale('de')],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('de'),
+      child: Builder(
+        builder: (context) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: locator<AppStateCubit>()),
+            ],
+            child: MaterialApp.router(
+              theme: AppTheme.getDefaultTheme(),
+              routeInformationParser: router.routeInformationParser,
+              routerDelegate: router.routerDelegate,
+              routeInformationProvider: router.routeInformationProvider,
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+            ),
+          );
+        },
       ),
     );
-  }
-
-  Future<void> _appInit() async {
-    await _streamController.stream.first;
-    _streamController.close();
-  }
-
-  void _onAuthStateChanged(AuthState state) {
-    state.whenOrNull(initial: () => locator<UsersBloc>().add(const UsersEvent.reset()));
   }
 }

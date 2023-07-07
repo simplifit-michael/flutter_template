@@ -1,14 +1,21 @@
+import 'package:flutter_template/src/core/service/l18n.dart';
+import 'package:flutter_template/src/domain/app_state/cubit/app_state_cubit.dart';
 import 'package:flutter/material.dart';
-import '../../../core/service/export.dart';
-import '/src/core/app/export.dart';
+import 'package:flutter_template/src/core/app/export.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class InfoPopup extends StatelessWidget {
-  final String? title;
-  final String description;
-  final String? buttonLabel;
-  final VoidCallback onSubmit;
-
-  const InfoPopup({super.key, this.title, required this.description, this.buttonLabel, required this.onSubmit});
+  const InfoPopup({
+    required this.messageKey,
+    super.key,
+    this.captionKey,
+    this.buttonkey,
+    this.namedArgs,
+  });
+  final String? captionKey;
+  final String messageKey;
+  final String? buttonkey;
+  final Map<String, String>? namedArgs;
 
   @override
   Widget build(BuildContext context) {
@@ -29,20 +36,23 @@ class InfoPopup extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  title ?? S.of(context)!.generic_info_generic_title,
+                  captionKey?.tr() ?? LocaleKeys.generalInfoGenericCaption.tr(),
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
                 Text(
-                  description,
+                  messageKey.tr(namedArgs: namedArgs),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
                 ElevatedButton(
-                  onPressed: onSubmit,
+                  onPressed: () {
+                    context.read<AppStateCubit>().reset();
+                    Navigator.of(context).pop();
+                  },
                   child: Text(
-                    buttonLabel ?? S.of(context)!.generic_button_okay,
+                    buttonkey?.tr() ?? LocaleKeys.generalButtonOkay.tr(),
                   ),
                 ),
               ],

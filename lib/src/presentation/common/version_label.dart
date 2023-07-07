@@ -1,23 +1,22 @@
+import 'package:flutter_template/src/core/service/l18n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class VersionLabel extends StatelessWidget {
-  const VersionLabel({Key? key}) : super(key: key);
+  const VersionLabel({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<PackageInfo>(
       future: PackageInfo.fromPlatform(),
       builder: (context, future) {
-        final versionString = future.connectionState == ConnectionState.done &&
-                future.data != null
+        final versionString = future.connectionState == ConnectionState.done
             ? '${future.data!.version} (${future.data!.buildNumber})'
-            : S.of(context)!.generic_error_unknown_version_label;
+            : LocaleKeys.generalErrorUnknownVersionLabel.tr();
         return Text(
-          '${S.of(context)!.company} ${S.of(context)!.app_title}\nv$versionString',
+          '${LocaleKeys.company.tr()} ${LocaleKeys.appTitle.tr()}\nv$versionString',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.bodyText1,
+          style: Theme.of(context).textTheme.bodyLarge,
         );
       },
     );
