@@ -1,0 +1,14 @@
+name: feature
+description: A new brick created with the Mason CLI.
+
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev.50 <0.1.0"
+
+vars:
+  feature_name:
+    type: string #string, number, boolean, enum, array, or list
+    description: Feature Name
+    #default: Dash
+    prompt: What is the Name of the new Feature?

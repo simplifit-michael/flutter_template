@@ -15,9 +15,10 @@ analyzer:
     missing_required_param: error
 
   exclude:
-    - test/*
+    - bricks/**
+    - test/**
     - lib/generated_plugin_registrant.dart
-    - lib/generated/*
+    - lib/generated/**
     - lib/**/*.g.dart
     - lib/**/*.freezed.dart
     - test/**/*.mocks.dart
