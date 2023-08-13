@@ -16,7 +16,7 @@
         "editor.formatOnSave": true,
         "editor.wordWrapColumn": 80
     },
-    "dart.lineLength": 120,
+    "dart.lineLength": 80,
     "dart.checkForSdkUpdates": false,
     "dart.openDevTools": "never",
     "dart.devToolsLocation": "external",

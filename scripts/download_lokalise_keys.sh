@@ -1,5 +1,15 @@
 #!/bin/zsh
-lokalise2 file download --config ./lokalise-config.yaml --format json --all-platforms --unzip-to ./lib/l10n/ --original-filenames=false --include-tags Mobileapp 
+brew tap lokalise/cli-2                     
+brew install lokalise2
+
+lokalise2 file download \
+    --config ./lokalise-config.yaml \
+    --format json \
+    --all-platforms \
+    --unzip-to ./lib/l10n/ \
+    --original-filenames=false \
+    --include-tags Mobileapp 
+
 mv ./lib/l10n/locale/* ./lib/l10n/
 rmdir ./lib/l10n/locale/
 mv ./lib/l10n/de.json ./lib/l10n/intl_de.arb

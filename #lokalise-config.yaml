@@ -1,0 +1,21 @@
+# Lokalise CLI v2 example config
+# Copy it to config.yml and modify to use
+
+token: # TODO Insert Token Here
+project-id: # TODO Insert ProjectId Here
+
+# Number of retries for API requests.
+retry-count: 5
+
+# Sleep time before retrying a request.
+retry-timeout: 500ms
+
+# Connection timeout for API requests.
+connection-timeout: 5s
+
+# Items to return per page.
+page-limit: 1000
+
+# Debug API requests.
+#debug: true
+

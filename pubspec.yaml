@@ -16,7 +16,10 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_svg: ^2.0.7
+  #FIXME: Choose Localization Strategy
   # flutter_translaty: ^1.0.7
+  # flutter_lokalise: ^1.0.0
+  # flutter_localization: ^0.1.13
   freezed_annotation: ^2.2.0
   get_it: ^7.2.0
   go_router: ^7.0.1
@@ -53,6 +56,10 @@ flutter_appsize_generator:
   raster_size: 8 #default
   #defines which step is the max step to generate
   max_size: 120 #default
+
+# flutter_lokalise:
+#   project_id: Insert Project Id
+#   api_token: Insert Api Token
 
 flutter:
   # FIXME: Only enable on standard localization or Lokalise
