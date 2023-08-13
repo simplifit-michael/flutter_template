@@ -5,10 +5,10 @@ import '../model/feature_flag.dart';
 import 'local_feature_flag_data_source.dart';
 
 class SharedPrefsFeatureFlagDataSource extends LocalFeatureFlagDataSource {
+  SharedPrefsFeatureFlagDataSource(this._prefs);
+
   final _logger = Logger('$SharedPrefsFeatureFlagDataSource');
   final SharedPreferences _prefs;
-
-  SharedPrefsFeatureFlagDataSource(this._prefs);
 
   @override
   bool isFeatureEnabled(FeatureFlag feature) {

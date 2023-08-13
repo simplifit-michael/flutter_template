@@ -11,7 +11,7 @@ import '../../export.dart';
 Future<void> setupCoreDependencies() async {
   _initEnv();
   await _initThirdParty();
-  _initFeaturFlagService(shouldUseSharedPrefs: true);
+  await _initFeaturFlagService(shouldUseSharedPrefs: true);
   _initNetworkInfoService();
   _initDioFactory();
 }
@@ -46,7 +46,7 @@ Future<void> _initThirdParty() async {
 
 void _initLogger() {
   Logger.root.level = kDebugMode ? Level.ALL : Level.INFO;
-   Logger.root.onRecord.listen((record) {
+  Logger.root.onRecord.listen((record) {
     dev.log('[${record.loggerName}] ${record.level} - ${record.message}');
   });
 }
@@ -65,8 +65,9 @@ void _initConnectivity() {
   locator.registerSingleton(Connectivity());
 }
 
-Future<void> _initFeaturFlagService(
-    {required bool shouldUseSharedPrefs}) async {
+Future<void> _initFeaturFlagService({
+  required bool shouldUseSharedPrefs,
+}) async {
   late final LocalFeatureFlagDataSource local;
   if (shouldUseSharedPrefs) {
     local = SharedPrefsFeatureFlagDataSource(locator<SharedPreferences>());

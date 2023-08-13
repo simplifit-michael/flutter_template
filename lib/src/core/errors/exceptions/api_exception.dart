@@ -23,7 +23,7 @@ class ApiException extends DataLayerException implements Exception {
           stackTrace: StackTrace.current,
         );
 
-  ApiException.fromDioError(DioError dioError)
+  ApiException.fromDioError(DioException dioError)
       : super(
           code: _getCode(dioError),
           error: dioError.error,
@@ -33,26 +33,29 @@ class ApiException extends DataLayerException implements Exception {
 
   @override
   String toString() {
+    // ignore: lines_longer_than_80_chars
     return '[$ApiException (code: $code, message: $message, error: $error, stackTrace: $stackTrace)]';
   }
 
-  static DataLayerExceptionCode _getCode(DioError dioError) {
+  static DataLayerExceptionCode _getCode(DioException dioError) {
     switch (dioError.type) {
-      case DioErrorType.connectionTimeout:
+      case DioExceptionType.connectionTimeout:
         return DataLayerExceptionCode.connectTimeout;
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         return DataLayerExceptionCode.sendTimeout;
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         return DataLayerExceptionCode.receiveTimeout;
-      case DioErrorType.badResponse:
-        return DataLayerExceptionCodeExtension.fromResponseCode(dioError.response?.statusCode);
-      case DioErrorType.cancel:
+      case DioExceptionType.badResponse:
+        return DataLayerExceptionCodeExtension //
+            .fromResponseCode(dioError.response?.statusCode);
+      case DioExceptionType.cancel:
         return DataLayerExceptionCode.cancel;
-      case DioErrorType.unknown:
-        return DataLayerExceptionCodeExtension.fromException(dioError.error);
-      case DioErrorType.badCertificate:
+      case DioExceptionType.unknown:
+        return DataLayerExceptionCodeExtension //
+            .fromException(dioError.error);
+      case DioExceptionType.badCertificate:
         return DataLayerExceptionCode.badCertificate;
-      case DioErrorType.connectionError:
+      case DioExceptionType.connectionError:
         return DataLayerExceptionCode.connectionError;
     }
   }

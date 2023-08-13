@@ -2,7 +2,6 @@ export 'assets/image_asset.dart';
 export 'router/app_router.dart';
 export 'styles/app_color.dart';
 export 'styles/app_font.dart';
-export 'styles/app_size.dart';
 export 'styles/app_ui_constraints.dart';
 export 'themes/app_color_scheme.dart';
 export 'themes/app_text_theme.dart';

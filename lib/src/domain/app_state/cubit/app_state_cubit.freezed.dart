@@ -19,62 +19,51 @@ mixin _$AppStateState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() ready,
-    required TResult Function() loading,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
-        info,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
+    required TResult Function(LoadingReason? reason) loading,
+    required TResult Function(ErrorReason? reason, VoidCallback? onConfirm)
         error,
+    required TResult Function(InfoReason reason, VoidCallback? onConfirm) info,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? ready,
-    TResult? Function()? loading,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
+    TResult? Function(LoadingReason? reason)? loading,
+    TResult? Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult? Function(InfoReason reason, VoidCallback? onConfirm)? info,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? ready,
-    TResult Function()? loading,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
+    TResult Function(LoadingReason? reason)? loading,
+    TResult Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult Function(InfoReason reason, VoidCallback? onConfirm)? info,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Ready value) ready,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Info value) info,
-    required TResult Function(_Error value) error,
+    required TResult Function(_AppReadyState value) ready,
+    required TResult Function(_AppLoadingState value) loading,
+    required TResult Function(_AppErrorState value) error,
+    required TResult Function(_AppInfoState value) info,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Ready value)? ready,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Info value)? info,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_AppReadyState value)? ready,
+    TResult? Function(_AppLoadingState value)? loading,
+    TResult? Function(_AppErrorState value)? error,
+    TResult? Function(_AppInfoState value)? info,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Ready value)? ready,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Info value)? info,
-    TResult Function(_Error value)? error,
+    TResult Function(_AppReadyState value)? ready,
+    TResult Function(_AppLoadingState value)? loading,
+    TResult Function(_AppErrorState value)? error,
+    TResult Function(_AppInfoState value)? info,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -99,23 +88,25 @@ class _$AppStateStateCopyWithImpl<$Res, $Val extends AppStateState>
 }
 
 /// @nodoc
-abstract class _$$_ReadyCopyWith<$Res> {
-  factory _$$_ReadyCopyWith(_$_Ready value, $Res Function(_$_Ready) then) =
-      __$$_ReadyCopyWithImpl<$Res>;
+abstract class _$$_AppReadyStateCopyWith<$Res> {
+  factory _$$_AppReadyStateCopyWith(
+          _$_AppReadyState value, $Res Function(_$_AppReadyState) then) =
+      __$$_AppReadyStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_ReadyCopyWithImpl<$Res>
-    extends _$AppStateStateCopyWithImpl<$Res, _$_Ready>
-    implements _$$_ReadyCopyWith<$Res> {
-  __$$_ReadyCopyWithImpl(_$_Ready _value, $Res Function(_$_Ready) _then)
+class __$$_AppReadyStateCopyWithImpl<$Res>
+    extends _$AppStateStateCopyWithImpl<$Res, _$_AppReadyState>
+    implements _$$_AppReadyStateCopyWith<$Res> {
+  __$$_AppReadyStateCopyWithImpl(
+      _$_AppReadyState _value, $Res Function(_$_AppReadyState) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Ready implements _Ready {
-  const _$_Ready();
+class _$_AppReadyState implements _AppReadyState {
+  const _$_AppReadyState();
 
   @override
   String toString() {
@@ -125,7 +116,7 @@ class _$_Ready implements _Ready {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Ready);
+        (other.runtimeType == runtimeType && other is _$_AppReadyState);
   }
 
   @override
@@ -135,13 +126,10 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() ready,
-    required TResult Function() loading,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
-        info,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
+    required TResult Function(LoadingReason? reason) loading,
+    required TResult Function(ErrorReason? reason, VoidCallback? onConfirm)
         error,
+    required TResult Function(InfoReason reason, VoidCallback? onConfirm) info,
   }) {
     return ready();
   }
@@ -150,13 +138,9 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? ready,
-    TResult? Function()? loading,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
+    TResult? Function(LoadingReason? reason)? loading,
+    TResult? Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult? Function(InfoReason reason, VoidCallback? onConfirm)? info,
   }) {
     return ready?.call();
   }
@@ -165,13 +149,9 @@ class _$_Ready implements _Ready {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? ready,
-    TResult Function()? loading,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
+    TResult Function(LoadingReason? reason)? loading,
+    TResult Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult Function(InfoReason reason, VoidCallback? onConfirm)? info,
     required TResult orElse(),
   }) {
     if (ready != null) {
@@ -183,10 +163,10 @@ class _$_Ready implements _Ready {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Ready value) ready,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Info value) info,
-    required TResult Function(_Error value) error,
+    required TResult Function(_AppReadyState value) ready,
+    required TResult Function(_AppLoadingState value) loading,
+    required TResult Function(_AppErrorState value) error,
+    required TResult Function(_AppInfoState value) info,
   }) {
     return ready(this);
   }
@@ -194,10 +174,10 @@ class _$_Ready implements _Ready {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Ready value)? ready,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Info value)? info,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_AppReadyState value)? ready,
+    TResult? Function(_AppLoadingState value)? loading,
+    TResult? Function(_AppErrorState value)? error,
+    TResult? Function(_AppInfoState value)? info,
   }) {
     return ready?.call(this);
   }
@@ -205,10 +185,10 @@ class _$_Ready implements _Ready {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Ready value)? ready,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Info value)? info,
-    TResult Function(_Error value)? error,
+    TResult Function(_AppReadyState value)? ready,
+    TResult Function(_AppLoadingState value)? loading,
+    TResult Function(_AppErrorState value)? error,
+    TResult Function(_AppInfoState value)? info,
     required TResult orElse(),
   }) {
     if (ready != null) {
@@ -218,89 +198,105 @@ class _$_Ready implements _Ready {
   }
 }
 
-abstract class _Ready implements AppStateState {
-  const factory _Ready() = _$_Ready;
+abstract class _AppReadyState implements AppStateState {
+  const factory _AppReadyState() = _$_AppReadyState;
 }
 
 /// @nodoc
-abstract class _$$_LoadingCopyWith<$Res> {
-  factory _$$_LoadingCopyWith(
-          _$_Loading value, $Res Function(_$_Loading) then) =
-      __$$_LoadingCopyWithImpl<$Res>;
+abstract class _$$_AppLoadingStateCopyWith<$Res> {
+  factory _$$_AppLoadingStateCopyWith(
+          _$_AppLoadingState value, $Res Function(_$_AppLoadingState) then) =
+      __$$_AppLoadingStateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({LoadingReason? reason});
 }
 
 /// @nodoc
-class __$$_LoadingCopyWithImpl<$Res>
-    extends _$AppStateStateCopyWithImpl<$Res, _$_Loading>
-    implements _$$_LoadingCopyWith<$Res> {
-  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+class __$$_AppLoadingStateCopyWithImpl<$Res>
+    extends _$AppStateStateCopyWithImpl<$Res, _$_AppLoadingState>
+    implements _$$_AppLoadingStateCopyWith<$Res> {
+  __$$_AppLoadingStateCopyWithImpl(
+      _$_AppLoadingState _value, $Res Function(_$_AppLoadingState) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? reason = freezed,
+  }) {
+    return _then(_$_AppLoadingState(
+      reason: freezed == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as LoadingReason?,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading();
+class _$_AppLoadingState implements _AppLoadingState {
+  const _$_AppLoadingState({this.reason});
+
+  @override
+  final LoadingReason? reason;
 
   @override
   String toString() {
-    return 'AppStateState.loading()';
+    return 'AppStateState.loading(reason: $reason)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
+        (other.runtimeType == runtimeType &&
+            other is _$_AppLoadingState &&
+            (identical(other.reason, reason) || other.reason == reason));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, reason);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AppLoadingStateCopyWith<_$_AppLoadingState> get copyWith =>
+      __$$_AppLoadingStateCopyWithImpl<_$_AppLoadingState>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() ready,
-    required TResult Function() loading,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
-        info,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
+    required TResult Function(LoadingReason? reason) loading,
+    required TResult Function(ErrorReason? reason, VoidCallback? onConfirm)
         error,
+    required TResult Function(InfoReason reason, VoidCallback? onConfirm) info,
   }) {
-    return loading();
+    return loading(reason);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? ready,
-    TResult? Function()? loading,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
+    TResult? Function(LoadingReason? reason)? loading,
+    TResult? Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult? Function(InfoReason reason, VoidCallback? onConfirm)? info,
   }) {
-    return loading?.call();
+    return loading?.call(reason);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? ready,
-    TResult Function()? loading,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
+    TResult Function(LoadingReason? reason)? loading,
+    TResult Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult Function(InfoReason reason, VoidCallback? onConfirm)? info,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(reason);
     }
     return orElse();
   }
@@ -308,10 +304,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Ready value) ready,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Info value) info,
-    required TResult Function(_Error value) error,
+    required TResult Function(_AppReadyState value) ready,
+    required TResult Function(_AppLoadingState value) loading,
+    required TResult Function(_AppErrorState value) error,
+    required TResult Function(_AppInfoState value) info,
   }) {
     return loading(this);
   }
@@ -319,10 +315,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Ready value)? ready,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Info value)? info,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_AppReadyState value)? ready,
+    TResult? Function(_AppLoadingState value)? loading,
+    TResult? Function(_AppErrorState value)? error,
+    TResult? Function(_AppInfoState value)? info,
   }) {
     return loading?.call(this);
   }
@@ -330,10 +326,10 @@ class _$_Loading implements _Loading {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Ready value)? ready,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Info value)? info,
-    TResult Function(_Error value)? error,
+    TResult Function(_AppReadyState value)? ready,
+    TResult Function(_AppLoadingState value)? loading,
+    TResult Function(_AppErrorState value)? error,
+    TResult Function(_AppInfoState value)? info,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -343,365 +339,120 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements AppStateState {
-  const factory _Loading() = _$_Loading;
+abstract class _AppLoadingState implements AppStateState {
+  const factory _AppLoadingState({final LoadingReason? reason}) =
+      _$_AppLoadingState;
+
+  LoadingReason? get reason;
+  @JsonKey(ignore: true)
+  _$$_AppLoadingStateCopyWith<_$_AppLoadingState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_InfoCopyWith<$Res> {
-  factory _$$_InfoCopyWith(_$_Info value, $Res Function(_$_Info) then) =
-      __$$_InfoCopyWithImpl<$Res>;
+abstract class _$$_AppErrorStateCopyWith<$Res> {
+  factory _$$_AppErrorStateCopyWith(
+          _$_AppErrorState value, $Res Function(_$_AppErrorState) then) =
+      __$$_AppErrorStateCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {String captionKey,
-      String messageKey,
-      String buttonKey,
-      Map<String, String>? namedArgs});
+  $Res call({ErrorReason? reason, VoidCallback? onConfirm});
 }
 
 /// @nodoc
-class __$$_InfoCopyWithImpl<$Res>
-    extends _$AppStateStateCopyWithImpl<$Res, _$_Info>
-    implements _$$_InfoCopyWith<$Res> {
-  __$$_InfoCopyWithImpl(_$_Info _value, $Res Function(_$_Info) _then)
+class __$$_AppErrorStateCopyWithImpl<$Res>
+    extends _$AppStateStateCopyWithImpl<$Res, _$_AppErrorState>
+    implements _$$_AppErrorStateCopyWith<$Res> {
+  __$$_AppErrorStateCopyWithImpl(
+      _$_AppErrorState _value, $Res Function(_$_AppErrorState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? captionKey = null,
-    Object? messageKey = null,
-    Object? buttonKey = null,
-    Object? namedArgs = freezed,
+    Object? reason = freezed,
+    Object? onConfirm = freezed,
   }) {
-    return _then(_$_Info(
-      captionKey: null == captionKey
-          ? _value.captionKey
-          : captionKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      messageKey: null == messageKey
-          ? _value.messageKey
-          : messageKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      buttonKey: null == buttonKey
-          ? _value.buttonKey
-          : buttonKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      namedArgs: freezed == namedArgs
-          ? _value._namedArgs
-          : namedArgs // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
+    return _then(_$_AppErrorState(
+      reason: freezed == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as ErrorReason?,
+      onConfirm: freezed == onConfirm
+          ? _value.onConfirm
+          : onConfirm // ignore: cast_nullable_to_non_nullable
+              as VoidCallback?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Info implements _Info {
-  const _$_Info(
-      {required this.captionKey,
-      required this.messageKey,
-      required this.buttonKey,
-      final Map<String, String>? namedArgs})
-      : _namedArgs = namedArgs;
+class _$_AppErrorState implements _AppErrorState {
+  const _$_AppErrorState({this.reason, this.onConfirm});
 
   @override
-  final String captionKey;
+  final ErrorReason? reason;
   @override
-  final String messageKey;
-  @override
-  final String buttonKey;
-  final Map<String, String>? _namedArgs;
-  @override
-  Map<String, String>? get namedArgs {
-    final value = _namedArgs;
-    if (value == null) return null;
-    if (_namedArgs is EqualUnmodifiableMapView) return _namedArgs;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
+  final VoidCallback? onConfirm;
 
   @override
   String toString() {
-    return 'AppStateState.info(captionKey: $captionKey, messageKey: $messageKey, buttonKey: $buttonKey, namedArgs: $namedArgs)';
+    return 'AppStateState.error(reason: $reason, onConfirm: $onConfirm)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Info &&
-            (identical(other.captionKey, captionKey) ||
-                other.captionKey == captionKey) &&
-            (identical(other.messageKey, messageKey) ||
-                other.messageKey == messageKey) &&
-            (identical(other.buttonKey, buttonKey) ||
-                other.buttonKey == buttonKey) &&
-            const DeepCollectionEquality()
-                .equals(other._namedArgs, _namedArgs));
+            other is _$_AppErrorState &&
+            (identical(other.reason, reason) || other.reason == reason) &&
+            (identical(other.onConfirm, onConfirm) ||
+                other.onConfirm == onConfirm));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, captionKey, messageKey,
-      buttonKey, const DeepCollectionEquality().hash(_namedArgs));
+  int get hashCode => Object.hash(runtimeType, reason, onConfirm);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_InfoCopyWith<_$_Info> get copyWith =>
-      __$$_InfoCopyWithImpl<_$_Info>(this, _$identity);
+  _$$_AppErrorStateCopyWith<_$_AppErrorState> get copyWith =>
+      __$$_AppErrorStateCopyWithImpl<_$_AppErrorState>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() ready,
-    required TResult Function() loading,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
-        info,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
+    required TResult Function(LoadingReason? reason) loading,
+    required TResult Function(ErrorReason? reason, VoidCallback? onConfirm)
         error,
+    required TResult Function(InfoReason reason, VoidCallback? onConfirm) info,
   }) {
-    return info(captionKey, messageKey, buttonKey, namedArgs);
+    return error(reason, onConfirm);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? ready,
-    TResult? Function()? loading,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
+    TResult? Function(LoadingReason? reason)? loading,
+    TResult? Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult? Function(InfoReason reason, VoidCallback? onConfirm)? info,
   }) {
-    return info?.call(captionKey, messageKey, buttonKey, namedArgs);
+    return error?.call(reason, onConfirm);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? ready,
-    TResult Function()? loading,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
-    required TResult orElse(),
-  }) {
-    if (info != null) {
-      return info(captionKey, messageKey, buttonKey, namedArgs);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Ready value) ready,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Info value) info,
-    required TResult Function(_Error value) error,
-  }) {
-    return info(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Ready value)? ready,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Info value)? info,
-    TResult? Function(_Error value)? error,
-  }) {
-    return info?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Ready value)? ready,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Info value)? info,
-    TResult Function(_Error value)? error,
-    required TResult orElse(),
-  }) {
-    if (info != null) {
-      return info(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Info implements AppStateState {
-  const factory _Info(
-      {required final String captionKey,
-      required final String messageKey,
-      required final String buttonKey,
-      final Map<String, String>? namedArgs}) = _$_Info;
-
-  String get captionKey;
-  String get messageKey;
-  String get buttonKey;
-  Map<String, String>? get namedArgs;
-  @JsonKey(ignore: true)
-  _$$_InfoCopyWith<_$_Info> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$_ErrorCopyWith<$Res> {
-  factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
-      __$$_ErrorCopyWithImpl<$Res>;
-  @useResult
-  $Res call(
-      {String captionKey,
-      String messageKey,
-      String buttonKey,
-      Map<String, String>? namedArgs});
-}
-
-/// @nodoc
-class __$$_ErrorCopyWithImpl<$Res>
-    extends _$AppStateStateCopyWithImpl<$Res, _$_Error>
-    implements _$$_ErrorCopyWith<$Res> {
-  __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? captionKey = null,
-    Object? messageKey = null,
-    Object? buttonKey = null,
-    Object? namedArgs = freezed,
-  }) {
-    return _then(_$_Error(
-      captionKey: null == captionKey
-          ? _value.captionKey
-          : captionKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      messageKey: null == messageKey
-          ? _value.messageKey
-          : messageKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      buttonKey: null == buttonKey
-          ? _value.buttonKey
-          : buttonKey // ignore: cast_nullable_to_non_nullable
-              as String,
-      namedArgs: freezed == namedArgs
-          ? _value._namedArgs
-          : namedArgs // ignore: cast_nullable_to_non_nullable
-              as Map<String, String>?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_Error implements _Error {
-  const _$_Error(
-      {required this.captionKey,
-      required this.messageKey,
-      required this.buttonKey,
-      final Map<String, String>? namedArgs})
-      : _namedArgs = namedArgs;
-
-  @override
-  final String captionKey;
-  @override
-  final String messageKey;
-  @override
-  final String buttonKey;
-  final Map<String, String>? _namedArgs;
-  @override
-  Map<String, String>? get namedArgs {
-    final value = _namedArgs;
-    if (value == null) return null;
-    if (_namedArgs is EqualUnmodifiableMapView) return _namedArgs;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
-  @override
-  String toString() {
-    return 'AppStateState.error(captionKey: $captionKey, messageKey: $messageKey, buttonKey: $buttonKey, namedArgs: $namedArgs)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$_Error &&
-            (identical(other.captionKey, captionKey) ||
-                other.captionKey == captionKey) &&
-            (identical(other.messageKey, messageKey) ||
-                other.messageKey == messageKey) &&
-            (identical(other.buttonKey, buttonKey) ||
-                other.buttonKey == buttonKey) &&
-            const DeepCollectionEquality()
-                .equals(other._namedArgs, _namedArgs));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, captionKey, messageKey,
-      buttonKey, const DeepCollectionEquality().hash(_namedArgs));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
-      __$$_ErrorCopyWithImpl<_$_Error>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() ready,
-    required TResult Function() loading,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
-        info,
-    required TResult Function(String captionKey, String messageKey,
-            String buttonKey, Map<String, String>? namedArgs)
-        error,
-  }) {
-    return error(captionKey, messageKey, buttonKey, namedArgs);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? ready,
-    TResult? Function()? loading,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult? Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
-  }) {
-    return error?.call(captionKey, messageKey, buttonKey, namedArgs);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? ready,
-    TResult Function()? loading,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        info,
-    TResult Function(String captionKey, String messageKey, String buttonKey,
-            Map<String, String>? namedArgs)?
-        error,
+    TResult Function(LoadingReason? reason)? loading,
+    TResult Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult Function(InfoReason reason, VoidCallback? onConfirm)? info,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(captionKey, messageKey, buttonKey, namedArgs);
+      return error(reason, onConfirm);
     }
     return orElse();
   }
@@ -709,10 +460,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Ready value) ready,
-    required TResult Function(_Loading value) loading,
-    required TResult Function(_Info value) info,
-    required TResult Function(_Error value) error,
+    required TResult Function(_AppReadyState value) ready,
+    required TResult Function(_AppLoadingState value) loading,
+    required TResult Function(_AppErrorState value) error,
+    required TResult Function(_AppInfoState value) info,
   }) {
     return error(this);
   }
@@ -720,10 +471,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Ready value)? ready,
-    TResult? Function(_Loading value)? loading,
-    TResult? Function(_Info value)? info,
-    TResult? Function(_Error value)? error,
+    TResult? Function(_AppReadyState value)? ready,
+    TResult? Function(_AppLoadingState value)? loading,
+    TResult? Function(_AppErrorState value)? error,
+    TResult? Function(_AppInfoState value)? info,
   }) {
     return error?.call(this);
   }
@@ -731,10 +482,10 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Ready value)? ready,
-    TResult Function(_Loading value)? loading,
-    TResult Function(_Info value)? info,
-    TResult Function(_Error value)? error,
+    TResult Function(_AppReadyState value)? ready,
+    TResult Function(_AppLoadingState value)? loading,
+    TResult Function(_AppErrorState value)? error,
+    TResult Function(_AppInfoState value)? info,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -744,18 +495,172 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements AppStateState {
-  const factory _Error(
-      {required final String captionKey,
-      required final String messageKey,
-      required final String buttonKey,
-      final Map<String, String>? namedArgs}) = _$_Error;
+abstract class _AppErrorState implements AppStateState {
+  const factory _AppErrorState(
+      {final ErrorReason? reason,
+      final VoidCallback? onConfirm}) = _$_AppErrorState;
 
-  String get captionKey;
-  String get messageKey;
-  String get buttonKey;
-  Map<String, String>? get namedArgs;
+  ErrorReason? get reason;
+  VoidCallback? get onConfirm;
   @JsonKey(ignore: true)
-  _$$_ErrorCopyWith<_$_Error> get copyWith =>
+  _$$_AppErrorStateCopyWith<_$_AppErrorState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_AppInfoStateCopyWith<$Res> {
+  factory _$$_AppInfoStateCopyWith(
+          _$_AppInfoState value, $Res Function(_$_AppInfoState) then) =
+      __$$_AppInfoStateCopyWithImpl<$Res>;
+  @useResult
+  $Res call({InfoReason reason, VoidCallback? onConfirm});
+}
+
+/// @nodoc
+class __$$_AppInfoStateCopyWithImpl<$Res>
+    extends _$AppStateStateCopyWithImpl<$Res, _$_AppInfoState>
+    implements _$$_AppInfoStateCopyWith<$Res> {
+  __$$_AppInfoStateCopyWithImpl(
+      _$_AppInfoState _value, $Res Function(_$_AppInfoState) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? reason = null,
+    Object? onConfirm = freezed,
+  }) {
+    return _then(_$_AppInfoState(
+      reason: null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as InfoReason,
+      onConfirm: freezed == onConfirm
+          ? _value.onConfirm
+          : onConfirm // ignore: cast_nullable_to_non_nullable
+              as VoidCallback?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AppInfoState implements _AppInfoState {
+  const _$_AppInfoState({required this.reason, required this.onConfirm});
+
+  @override
+  final InfoReason reason;
+  @override
+  final VoidCallback? onConfirm;
+
+  @override
+  String toString() {
+    return 'AppStateState.info(reason: $reason, onConfirm: $onConfirm)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_AppInfoState &&
+            (identical(other.reason, reason) || other.reason == reason) &&
+            (identical(other.onConfirm, onConfirm) ||
+                other.onConfirm == onConfirm));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, reason, onConfirm);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_AppInfoStateCopyWith<_$_AppInfoState> get copyWith =>
+      __$$_AppInfoStateCopyWithImpl<_$_AppInfoState>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() ready,
+    required TResult Function(LoadingReason? reason) loading,
+    required TResult Function(ErrorReason? reason, VoidCallback? onConfirm)
+        error,
+    required TResult Function(InfoReason reason, VoidCallback? onConfirm) info,
+  }) {
+    return info(reason, onConfirm);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? ready,
+    TResult? Function(LoadingReason? reason)? loading,
+    TResult? Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult? Function(InfoReason reason, VoidCallback? onConfirm)? info,
+  }) {
+    return info?.call(reason, onConfirm);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? ready,
+    TResult Function(LoadingReason? reason)? loading,
+    TResult Function(ErrorReason? reason, VoidCallback? onConfirm)? error,
+    TResult Function(InfoReason reason, VoidCallback? onConfirm)? info,
+    required TResult orElse(),
+  }) {
+    if (info != null) {
+      return info(reason, onConfirm);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AppReadyState value) ready,
+    required TResult Function(_AppLoadingState value) loading,
+    required TResult Function(_AppErrorState value) error,
+    required TResult Function(_AppInfoState value) info,
+  }) {
+    return info(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AppReadyState value)? ready,
+    TResult? Function(_AppLoadingState value)? loading,
+    TResult? Function(_AppErrorState value)? error,
+    TResult? Function(_AppInfoState value)? info,
+  }) {
+    return info?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AppReadyState value)? ready,
+    TResult Function(_AppLoadingState value)? loading,
+    TResult Function(_AppErrorState value)? error,
+    TResult Function(_AppInfoState value)? info,
+    required TResult orElse(),
+  }) {
+    if (info != null) {
+      return info(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AppInfoState implements AppStateState {
+  const factory _AppInfoState(
+      {required final InfoReason reason,
+      required final VoidCallback? onConfirm}) = _$_AppInfoState;
+
+  InfoReason get reason;
+  VoidCallback? get onConfirm;
+  @JsonKey(ignore: true)
+  _$$_AppInfoStateCopyWith<_$_AppInfoState> get copyWith =>
       throw _privateConstructorUsedError;
 }

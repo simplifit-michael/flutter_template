@@ -21,8 +21,8 @@ extension DioExtension on Dio {
       final response = await fetch(requestOptions);
       if (response.data is String) return jsonDecode(response.data);
       return response.data;
-    } on DioError catch (e) {
-      if (e.type == DioErrorType.unknown) {
+    } on DioException catch (e) {
+      if (e.type == DioExceptionType.unknown) {
         if (e.error is FormatException) return null;
       }
       if (e.response?.statusCode == 302) return null;

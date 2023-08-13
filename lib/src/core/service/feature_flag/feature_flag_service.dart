@@ -9,10 +9,10 @@ abstract class FeatureFlagService {
 }
 
 class FeatureFlagServiceImpl extends FeatureFlagService {
+  FeatureFlagServiceImpl(this._local);
+
   final _logger = Logger('$FeatureFlagServiceImpl');
   final LocalFeatureFlagDataSource _local;
-
-  FeatureFlagServiceImpl(this._local);
 
   @override
   bool isFeatureEnabled(FeatureFlag feature) {

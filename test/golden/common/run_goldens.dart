@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter_template/src/core/app/app.dart';
+import 'package:flutter_template/src/presentation/app/app.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:network_image_mock/network_image_mock.dart';
@@ -21,16 +21,16 @@ Future<void> runGoldenTest(
 }) async {
   assert((flow != null) ^ (flows != null));
 
-  flows ??= {"": flow!};
+  flows ??= {'': flow!};
   await loadAppFonts();
 
   await setupTestLocator();
   await setup?.call();
 
-  await tester.pumpWidgetBuilder(App());
-  int flowIndex = 1;
-  for (var flow in flows.entries) {
-    print("Starting flow $flowIndex: ${flow.key}");
+  await tester.pumpWidgetBuilder(const App());
+  var flowIndex = 1;
+  for (final flow in flows.entries) {
+    print('Starting flow $flowIndex: ${flow.key}');
     await flow.value(tester);
     await mockNetworkImagesFor(() => tester.pumpAndSettle());
     await multiScreenGolden(
@@ -39,7 +39,7 @@ Future<void> runGoldenTest(
         groupName,
         testName,
         flow.key,
-        flows.length > 1 ? "$flowIndex - " : "",
+        flows.length > 1 ? '$flowIndex - ' : '',
       ),
       devices: [
         Device.phone,
@@ -53,6 +53,6 @@ Future<void> runGoldenTest(
 }
 
 String _getTestName(String groupName, String testName, String flowName, String flowIndex) {
-  final fileName = flowName == "" ? testName : flowName;
+  final fileName = flowName == '' ? testName : flowName;
   return "$groupName/$testName/$flowIndex$fileName";
 }

@@ -6,10 +6,8 @@ import 'package:logging/logging.dart';
 class CurlLoggerDioInterceptor extends Interceptor {
   final logger = Logger('$CurlLoggerDioInterceptor');
 
-  CurlLoggerDioInterceptor();
-
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     _renderCurlRepresentation(err.requestOptions);
 
     return handler.next(err);
@@ -28,12 +26,14 @@ class CurlLoggerDioInterceptor extends Interceptor {
     try {
       logger.info(_cURLRepresentation(requestOptions));
     } catch (err) {
-      logger.warning('unable to create a CURL representation of the requestOptions');
+      logger.warning(
+        'unable to create a CURL representation of the requestOptions',
+      );
     }
   }
 
   String _cURLRepresentation(RequestOptions options) {
-    List<String> components = ['curl -i'];
+    final components = <String>['curl -i'];
     if (options.method.toUpperCase() != 'GET') {
       components.add('-X ${options.method}');
     }
@@ -49,11 +49,11 @@ class CurlLoggerDioInterceptor extends Interceptor {
         options.data = Map.fromEntries(options.data.fields);
       }
 
-      final data = json.encode(options.data).replaceAll('"', '\\"');
+      final data = json.encode(options.data).replaceAll('"', r'\"');
       components.add('-d "$data"');
     }
 
-    components.add('"${options.uri.toString()}"');
+    components.add('"${options.uri}"');
 
     return components.join(' \\\n\t');
   }

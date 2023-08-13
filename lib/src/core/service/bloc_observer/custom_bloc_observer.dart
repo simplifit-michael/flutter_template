@@ -1,3 +1,5 @@
+// ignore_for_file: cascade_invocations
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';
 

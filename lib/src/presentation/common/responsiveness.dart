@@ -8,15 +8,6 @@ enum DeviceType {
 }
 
 class Responsiveness extends StatelessWidget {
-    final Widget _mobilePortrait;
-  final Widget _tabletPortrait;
-  final Widget _iOSMobilePortrait;
-  final Widget _iOSTabletPortrait;
-  final Widget _mobileLandscape;
-  final Widget _tabletLandscape;
-  final Widget _iOSMobileLandscape;
-  final Widget _iOSTabletLandscape;
-
   const Responsiveness({
     required Widget onMobile,
     Widget? onTablet,
@@ -26,15 +17,23 @@ class Responsiveness extends StatelessWidget {
     Widget? onTabletLandscape,
     Widget? onIOSMobileLandscape,
     Widget? onIOSTabletLandscape,
-    Key? key,
+    super.key,
   })  : _mobilePortrait = onMobile,
-        _tabletPortrait = onTablet ?? onMobile,
-        _iOSMobilePortrait = onIOSMobile ?? onMobile,
-        _iOSTabletPortrait = onIOSTablet ?? onIOSMobile ?? onTablet ?? onMobile,
-        _mobileLandscape = onMobileLandscape ?? onMobile,
-        _tabletLandscape =
-            onTabletLandscape ?? onTablet ?? onMobileLandscape ?? onMobile,
-        _iOSMobileLandscape = onIOSMobileLandscape ??
+        _tabletPortrait = onTablet ?? //
+            onMobile,
+        _iOSMobilePortrait = onIOSMobile ?? //
+            onMobile,
+        _iOSTabletPortrait = onIOSTablet ?? //
+            onIOSMobile ??
+            onTablet ??
+            onMobile,
+        _mobileLandscape = onMobileLandscape ?? //
+            onMobile,
+        _tabletLandscape = onTabletLandscape ?? //
+            onTablet ??
+            onMobileLandscape ??
+            onMobile,
+        _iOSMobileLandscape = onIOSMobileLandscape ?? //
             onIOSMobile ??
             onMobileLandscape ??
             onMobile,
@@ -44,8 +43,15 @@ class Responsiveness extends StatelessWidget {
             onIOSMobile ??
             onTabletLandscape ??
             onTablet ??
-            onMobile,
-        super(key: key);
+            onMobile;
+  final Widget _mobilePortrait;
+  final Widget _tabletPortrait;
+  final Widget _iOSMobilePortrait;
+  final Widget _iOSTabletPortrait;
+  final Widget _mobileLandscape;
+  final Widget _tabletLandscape;
+  final Widget _iOSMobileLandscape;
+  final Widget _iOSTabletLandscape;
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +74,12 @@ class Responsiveness extends StatelessWidget {
     }
   }
 
-  static bool isPortrait(BuildContext context) =>
+  static bool isPortrait(BuildContext context) => //
       MediaQuery.of(context).orientation == Orientation.portrait;
 
   static DeviceType getDeviceType(BuildContext context) {
-    var shortestSide = MediaQuery.of(context).size.shortestSide;
-    final bool useMobileLayout = shortestSide < 600;
+    final shortestSide = MediaQuery.of(context).size.shortestSide;
+    final useMobileLayout = shortestSide < 600;
     return useMobileLayout ? DeviceType.mobile : DeviceType.tablet;
   }
 
@@ -81,7 +87,7 @@ class Responsiveness extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final device = Responsiveness.getDeviceType(context);
     if (device == DeviceType.mobile) return screenWidth;
-    return Responsiveness.isPortrait(context)
+    return Responsiveness.isPortrait(context) //
         ? screenWidth / 1.5
         : screenWidth / 3;
   }

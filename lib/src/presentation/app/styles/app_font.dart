@@ -4,12 +4,12 @@ import '../export.dart';
 
 class AppFontFamily {
   AppFontFamily._();
-  
+
   static const String standard = 'Roboto';
 }
 
 class AppFontColor {
-  AppFontColor._(); 
+  AppFontColor._();
 
   static const Color standard = AppColor.secondary;
   static const Color headline = AppColor.primary;
@@ -17,8 +17,8 @@ class AppFontColor {
 }
 
 class AppFontWeight {
-  AppFontWeight._(); 
-  
+  AppFontWeight._();
+
   static const FontWeight light = FontWeight.w300;
   static const FontWeight regular = FontWeight.w400;
   static const FontWeight medium = FontWeight.w500;
@@ -27,13 +27,13 @@ class AppFontWeight {
 }
 
 class AppFontSize {
-  AppFontSize._(); 
-  
-  static const double regular = 12.0;
-  static const double h1 = 24.0;
-  static const double h2 = 20.0;
-  static const double h3 = 16.0;
-  static const double h4 = 12.0;
-  static const double h5 = 12.0;
-  static const double h6 = 12.0;
+  AppFontSize._();
+
+  static const double regular = 12;
+  static const double h1 = 24;
+  static const double h2 = 20;
+  static const double h3 = 16;
+  static const double h4 = 12;
+  static const double h5 = 12;
+  static const double h6 = 12;
 }

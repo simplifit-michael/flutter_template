@@ -1,3 +1,5 @@
+// ignore_for_file: omit_local_variable_types
+
 import 'dart:async';
 
 import 'package:dartz/dartz.dart';
@@ -11,16 +13,16 @@ import '../core/errors/export.dart';
 import 'base_model.dart';
 
 abstract class BaseRepository {
+  const BaseRepository(this._network);
   final NetworkService _network;
   Logger get _logger => Logger('$runtimeType');
 
-  BaseRepository(this._network);
-
-  Future<Either<FailureType, TDomain>> get<TModel extends BaseModel<TDomain>, TDomain>({
+  Future<Either<FailureType, TDomain>> //
+      get<TModel extends BaseModel<TDomain>, TDomain>({
     required FutureOr<TModel?> Function() localGet,
-    bool Function(TModel)? isLocalModelValid,
     required FutureOr<void> Function(TModel) localSet,
     required Future<TModel> Function() remoteGet,
+    bool Function(TModel)? isLocalModelValid,
     bool force = false,
     List<DataLayerExceptionCode> expectedErrors = const [],
   }) async {
@@ -28,7 +30,9 @@ abstract class BaseRepository {
       if (!force) _logger.fine('Requesting local $TModel');
       TModel? model = force ? null : await localGet();
       if (model == null || !(isLocalModelValid?.call(model) ?? false)) {
-        if (!(await _network.hasConnection)) return const Left(FailureType.noInternet);
+        if (!(await _network.hasConnection)) {
+          return const Left(FailureType.noInternet);
+        }
 
         _logger.fine('Requesting remote $TModel');
         model = await remoteGet();
@@ -37,9 +41,10 @@ abstract class BaseRepository {
       }
       return Right(model.toDomain());
     } on Exception catch (e) {
-      bool ignoreError = e is ApiException && expectedErrors.contains(e.code);
+      final bool ignoreError = //
+          e is ApiException && expectedErrors.contains(e.code);
       if (!ignoreError) {
-        FirebaseCrashlytics.instance.recordError(
+        await FirebaseCrashlytics.instance.recordError(
           'Failed requesting $TDomain',
           StackTrace.current,
           reason: e,
@@ -50,11 +55,12 @@ abstract class BaseRepository {
     }
   }
 
-  Future<Either<FailureType, List<TDomain>>> getList<TModel extends BaseModel<TDomain>, TDomain>({
+  Future<Either<FailureType, List<TDomain>>> //
+      getList<TModel extends BaseModel<TDomain>, TDomain>({
     required FutureOr<List<TModel>> Function() localGet,
-    bool Function(List<TModel>)? isLocalModelValid,
     required FutureOr<void> Function(List<TModel>) localSet,
     required Future<List<TModel>> Function() remoteGet,
+    bool Function(List<TModel>)? isLocalModelValid,
     bool force = false,
     List<DataLayerExceptionCode> expectedErrors = const [],
   }) async {
@@ -63,18 +69,23 @@ abstract class BaseRepository {
       List<TModel> model = force ? [] : await localGet();
       final isModelInvalid = !(isLocalModelValid?.call(model) ?? true);
       if (model.isEmpty || isModelInvalid) {
-        if (!(await _network.hasConnection)) return const Left(FailureType.noInternet);
+        if (!(await _network.hasConnection)) {
+          return const Left(FailureType.noInternet);
+        }
 
         _logger.fine('Requesting remote List<$TModel>');
         model = await remoteGet();
-        _logger.fine('Adding local ${model.length} new entries for List<$TModel>');
+        _logger.fine(
+          'Adding local ${model.length} new entries for List<$TModel>',
+        );
         await localSet(model);
       }
       return Right(model.map((e) => e.toDomain()).toList());
     } on Exception catch (e) {
-      bool ignoreError = e is ApiException && expectedErrors.contains(e.code);
+      final bool ignoreError = //
+          e is ApiException && expectedErrors.contains(e.code);
       if (!ignoreError) {
-        FirebaseCrashlytics.instance.recordError(
+        await FirebaseCrashlytics.instance.recordError(
           'Failed requesting List<$TDomain>',
           StackTrace.current,
           reason: e,
@@ -93,7 +104,13 @@ abstract class BaseRepository {
       await remoteAction();
       return const Right(null);
     } on Exception catch (e) {
-      return Left(await recordError(StackTrace.current, e, 'Error occurred while executing action on remote'));
+      return Left(
+        await recordError(
+          StackTrace.current,
+          e,
+          'Error occurred while executing action on remote',
+        ),
+      );
     }
   }
 
@@ -104,17 +121,29 @@ abstract class BaseRepository {
   }) async {
     try {
       _logger.fine('Executing update action');
-      if (!(await _network.hasConnection)) return const Left(FailureType.noInternet);
+      if (!(await _network.hasConnection)) {
+        return const Left(FailureType.noInternet);
+      }
       await remoteAction();
       localUpdate();
       notifyListeners?.call();
       return const Right(null);
     } on Exception catch (e) {
-      return Left(await recordError(StackTrace.current, e, 'Error occurred while executing update action'));
+      return Left(
+        await recordError(
+          StackTrace.current,
+          e,
+          'Error occurred while executing update action',
+        ),
+      );
     }
   }
 
-  Future<FailureType> recordError(StackTrace stackTrace, Exception e, String errorMessage) async {
+  Future<FailureType> recordError(
+    StackTrace stackTrace,
+    Exception e,
+    String errorMessage,
+  ) async {
     if (!kDebugMode) {
       await FirebaseCrashlytics.instance.recordError(
         errorMessage,

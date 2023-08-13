@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/src/core/app/export.dart';
+import '../../app/export.dart';
 
 class LoadingPopup extends StatelessWidget {
   const LoadingPopup({super.key});

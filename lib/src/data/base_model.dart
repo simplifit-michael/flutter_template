@@ -4,10 +4,10 @@ abstract interface class BaseModel<TDomain> {
   TDomain toDomain();
 }
 
-abstract class BaseModelList<TModel extends BaseModel<TDomain>, TDomain> extends BaseModel<List<TDomain>>
-    with ListMixin<TModel> {
-  final List<TModel> l = [];
+abstract class BaseModelList<TModel extends BaseModel<TDomain>, TDomain> //
+    extends BaseModel<List<TDomain>> with ListMixin<TModel> {
   BaseModelList();
+  final List<TModel> l = [];
 
   @override
   set length(int newLength) {

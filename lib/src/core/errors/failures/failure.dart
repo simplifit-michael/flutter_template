@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter_template/src/core/errors/exceptions/data_layer_exception.dart';
 
 enum FailureType {

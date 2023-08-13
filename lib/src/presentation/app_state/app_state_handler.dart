@@ -1,55 +1,95 @@
-import 'package:flutter_template/src/presentation/app_state/popup/error_popup.dart';
-import 'package:flutter_template/src/presentation/app_state/popup/info_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_template/src/domain/app_state/cubit/app_state_cubit.dart';
+import 'package:flutter_template/src/presentation/app_state/popup/error_popup.dart';
 import 'package:flutter_template/src/presentation/app_state/popup/loading_popup.dart';
 
-class AppStateHandler extends StatelessWidget {
+import 'loading_screen.dart';
+import '../../domain/app_state/cubit/app_state_cubit.dart';
+import 'popup/info_popup.dart';
+
+class AppStateHandler extends StatefulWidget {
   const AppStateHandler({required this.child, super.key});
+
   final Widget child;
+
+  @override
+  State<AppStateHandler> createState() => _AppStateHandlerState();
+}
+
+class _AppStateHandlerState extends State<AppStateHandler> {
+  @override
+  void didChangeDependencies() {
+    notifyUser();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AppStateCubit, AppStateState>(
-      listener: (context, state) {
-        state.map(
-          ready: (_) => null,
-          loading: (_) => null,
-          info: (state) => showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => InfoPopup(
-              messageKey: state.messageKey,
-              buttonkey: state.buttonKey,
-              captionKey: state.captionKey,
-              namedArgs: state.namedArgs,
-            ),
-          ),
-          error: (state) => showDialog(
-            context: context,
-            barrierDismissible: false,
-            builder: (context) => ErrorPopup(
-              descriptionKey: state.messageKey,
-              buttonKey: state.buttonKey,
-              captionKey: state.captionKey,
-              namedArgs: state.namedArgs,
-            ),
-          ),
-        );
-      },
+      listener: (context, state) => notifyUser(),
       builder: (context, state) {
+        final loadingState = state.map(
+          ready: (_) => null,
+          loading: (state) => state,
+          error: (_) => null,
+          info: (_) => null,
+        );
+
         return Stack(
           children: [
-            child,
-            if (state.isLoading)
-              ColoredBox(
-                color: Colors.black.withOpacity(0.3),
-                child: const LoadingPopup(),
-              ),
+            widget.child,
+            if (loadingState != null)
+              loadingState.reason?.isFullScreen ?? false
+                  ? LoadingScreen(
+                      iconAsset: loadingState.reason?.getAppIcon(),
+                      label: loadingState.reason?.getDescription(context),
+                    )
+                  : const LoadingPopup(),
           ],
         );
       },
+    );
+  }
+
+  void notifyUser() {
+    final cubit = context.read<AppStateCubit>();
+    cubit.state.map(
+      ready: (_) => null,
+      loading: (_) => null,
+      info: (state) => showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => InfoPopup(
+          caption: state.reason.getCaption(context),
+          description: state.reason.getDescription(context),
+          buttonLabel: state.reason.getButtonLabel(context),
+          onConfirm: () {
+            state.onConfirm?.call();
+            Navigator.of(context).pop();
+            cubit.reset();
+          },
+        ),
+      ),
+      error: (state) => showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => ErrorPopup(
+          caption: state.reason?.getCaption(context) ?? //
+              //FIXME: Localize Fallback with your choosen l10n Strategy
+              'Ups',
+          description: state.reason?.getDescription(context) ?? //
+              //FIXME: Localize Fallback with your choosen l10n Strategy
+              'An unknown Error occured',
+          buttonLabel: state.reason?.getButtonLabel(context) ?? //
+              //FIXME: Localize Fallback with your choosen l10n Strategy
+              'Ok',
+          onConfirm: () {
+            state.onConfirm?.call();
+            Navigator.of(context).pop();
+            cubit.reset();
+          },
+        ),
+      ),
     );
   }
 }

@@ -3,6 +3,21 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class FrostBackground extends StatelessWidget {
+  const FrostBackground({
+    required this.child,
+    super.key,
+    this.radius = BorderRadius.zero,
+    this.margin = 0,
+    this.padding = 0,
+    this.backgroundColor,
+    this.opacity = 0.5,
+    this.shadowOffset = 10,
+    this.shadowSpreadRadius = 4,
+    this.shadowBlurRadius = 8,
+    this.shadowOpacity = 0.5,
+    this.shadowColor,
+  });
+
   final Widget child;
   final BorderRadius radius;
   final double margin;
@@ -14,26 +29,12 @@ class FrostBackground extends StatelessWidget {
   final double shadowSpreadRadius;
   final double shadowBlurRadius;
   final Color? shadowColor;
-  const FrostBackground({
-    Key? key,
-    this.radius = BorderRadius.zero,
-    this.margin = 0,
-    this.padding = 0,
-    this.backgroundColor,
-    this.opacity = 0.5,
-    this.shadowOffset = 10,
-    this.shadowSpreadRadius = 4,
-    this.shadowBlurRadius = 8,
-    this.shadowOpacity = 0.5,
-    this.shadowColor,
-    required this.child,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(margin),
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           borderRadius: radius,
           boxShadow: [
@@ -48,13 +49,13 @@ class FrostBackground extends StatelessWidget {
         child: ClipRRect(
           borderRadius: radius,
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-            child: Container(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: DecoratedBox(
               decoration: BoxDecoration(
-                  color: (backgroundColor != null
-                          ? backgroundColor!
-                          : Colors.grey.shade200)
-                      .withOpacity(opacity)),
+                color: backgroundColor != null
+                    ? backgroundColor! //
+                    : Colors.grey.shade200.withOpacity(opacity),
+              ),
               child: Padding(
                 padding: EdgeInsets.all(padding),
                 child: child,

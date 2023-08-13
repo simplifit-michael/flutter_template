@@ -1,0 +1,36 @@
+import 'app_size.dart';
+import 'package:flutter/material.dart';
+
+const SizedBox horizontalMargin0 = SizedBox(width: AppSize.s0);
+const SizedBox horizontalMargin8 = SizedBox(width: AppSize.s8);
+const SizedBox horizontalMargin16 = SizedBox(width: AppSize.s16);
+const SizedBox horizontalMargin24 = SizedBox(width: AppSize.s24);
+const SizedBox horizontalMargin32 = SizedBox(width: AppSize.s32);
+const SizedBox horizontalMargin40 = SizedBox(width: AppSize.s40);
+const SizedBox horizontalMargin48 = SizedBox(width: AppSize.s48);
+const SizedBox horizontalMargin56 = SizedBox(width: AppSize.s56);
+const SizedBox horizontalMargin64 = SizedBox(width: AppSize.s64);
+const SizedBox horizontalMargin72 = SizedBox(width: AppSize.s72);
+const SizedBox horizontalMargin80 = SizedBox(width: AppSize.s80);
+const SizedBox horizontalMargin88 = SizedBox(width: AppSize.s88);
+const SizedBox horizontalMargin96 = SizedBox(width: AppSize.s96);
+const SizedBox horizontalMargin104 = SizedBox(width: AppSize.s104);
+const SizedBox horizontalMargin112 = SizedBox(width: AppSize.s112);
+const SizedBox horizontalMargin120 = SizedBox(width: AppSize.s120);
+
+const SizedBox verticalMargin0 = SizedBox(width: AppSize.s0);
+const SizedBox verticalMargin8 = SizedBox(height: AppSize.s8);
+const SizedBox verticalMargin16 = SizedBox(height: AppSize.s16);
+const SizedBox verticalMargin24 = SizedBox(height: AppSize.s24);
+const SizedBox verticalMargin32 = SizedBox(height: AppSize.s32);
+const SizedBox verticalMargin40 = SizedBox(height: AppSize.s40);
+const SizedBox verticalMargin48 = SizedBox(height: AppSize.s48);
+const SizedBox verticalMargin56 = SizedBox(height: AppSize.s56);
+const SizedBox verticalMargin64 = SizedBox(height: AppSize.s64);
+const SizedBox verticalMargin72 = SizedBox(height: AppSize.s72);
+const SizedBox verticalMargin80 = SizedBox(height: AppSize.s80);
+const SizedBox verticalMargin88 = SizedBox(height: AppSize.s88);
+const SizedBox verticalMargin96 = SizedBox(height: AppSize.s96);
+const SizedBox verticalMargin104 = SizedBox(height: AppSize.s104);
+const SizedBox verticalMargin112 = SizedBox(height: AppSize.s112);
+const SizedBox verticalMargin120 = SizedBox(height: AppSize.s120);

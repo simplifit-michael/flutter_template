@@ -5,11 +5,12 @@ import '../model/feature_flag.dart';
 import 'local_feature_flag_data_source.dart';
 
 class HiveFeatureFlagDataSource extends LocalFeatureFlagDataSource {
+  HiveFeatureFlagDataSource(this._hive);
+
   final _logger = Logger('$HiveFeatureFlagDataSource');
   final HiveInterface _hive;
-  Box get _box => _hive.box('$LocalFeatureFlagDataSource');
 
-  HiveFeatureFlagDataSource(this._hive);
+  Box get _box => _hive.box('$LocalFeatureFlagDataSource');
 
   Future<void> init() async {
     await _hive.openBox('$LocalFeatureFlagDataSource');

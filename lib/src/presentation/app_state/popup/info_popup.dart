@@ -1,21 +1,18 @@
-import 'package:flutter_template/src/core/service/l18n.dart';
-import 'package:flutter_template/src/domain/app_state/cubit/app_state_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_template/src/core/app/export.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_template/src/presentation/app/export.dart';
 
 class InfoPopup extends StatelessWidget {
   const InfoPopup({
-    required this.messageKey,
+    required this.caption,
+    required this.description,
+    required this.buttonLabel,
+    required this.onConfirm,
     super.key,
-    this.captionKey,
-    this.buttonkey,
-    this.namedArgs,
   });
-  final String? captionKey;
-  final String messageKey;
-  final String? buttonkey;
-  final Map<String, String>? namedArgs;
+  final String caption;
+  final String description;
+  final String buttonLabel;
+  final VoidCallback onConfirm;
 
   @override
   Widget build(BuildContext context) {
@@ -36,24 +33,19 @@ class InfoPopup extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  captionKey?.tr() ?? LocaleKeys.generalInfoGenericCaption.tr(),
+                  caption,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
                 Text(
-                  messageKey.tr(namedArgs: namedArgs),
+                  description,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
                 ElevatedButton(
-                  onPressed: () {
-                    context.read<AppStateCubit>().reset();
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    buttonkey?.tr() ?? LocaleKeys.generalButtonOkay.tr(),
-                  ),
+                  onPressed: onConfirm,
+                  child: Text(buttonLabel),
                 ),
               ],
             ),

@@ -14,7 +14,7 @@
     "[dart]": {
         "editor.formatOnPaste": true,
         "editor.formatOnSave": true,
-        "editor.wordWrapColumn": 120
+        "editor.wordWrapColumn": 80
     },
     "dart.lineLength": 120,
     "dart.checkForSdkUpdates": false,

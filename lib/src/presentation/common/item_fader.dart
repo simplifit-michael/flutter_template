@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 
 class ItemFader extends StatefulWidget {
+  const ItemFader({
+    required this.child,
+    super.key,
+    this.initialShow = true,
+  });
   final Widget child;
   final bool initialShow;
-  const ItemFader({Key? key, required this.child, this.initialShow = true})
-      : super(key: key);
 
   @override
   ItemFaderState createState() => ItemFaderState();
 }
 
-class ItemFaderState extends State<ItemFader>
-    with SingleTickerProviderStateMixin {
+class ItemFaderState extends State<ItemFader> //
+    with
+        SingleTickerProviderStateMixin {
   int position = 1;
   late AnimationController _animationController;
   late Animation _animation;

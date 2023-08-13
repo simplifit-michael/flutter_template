@@ -1,21 +1,19 @@
-import 'package:flutter_template/src/core/app/export.dart';
-import 'package:flutter_template/src/core/service/l18n.dart';
+import 'package:flutter_template/src/presentation/app/export.dart';
 import 'package:flutter/material.dart';
 
 class WarningPopup extends StatelessWidget {
   const WarningPopup({
-    required this.descriptionKey,
+    required this.caption,
+    required this.description,
+    required this.positiveButtonLabel,
+    required this.negativeButtonLabel,
     super.key,
-    this.captionKey,
-    this.positiveButtonKey,
-    this.negativeButtonKey,
-    this.namedArgs,
   });
-  final String? captionKey;
-  final String descriptionKey;
-  final String? positiveButtonKey;
-  final String? negativeButtonKey;
-  final Map<String, String>? namedArgs;
+
+  final String caption;
+  final String description;
+  final String positiveButtonLabel;
+  final String negativeButtonLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +34,13 @@ class WarningPopup extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  captionKey?.tr() ?? LocaleKeys.generalWarningCaption.tr(),
+                  caption,
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
                 Text(
-                  descriptionKey.tr(namedArgs: namedArgs),
+                  description,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: AppUIConstraints.spacing),
@@ -51,15 +49,11 @@ class WarningPopup extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(false),
-                      child: Text(
-                        negativeButtonKey?.tr() ?? LocaleKeys.generalButtonCancel.tr(),
-                      ),
+                      child: Text(negativeButtonLabel),
                     ),
                     ElevatedButton(
                       onPressed: () => Navigator.of(context).pop(true),
-                      child: Text(
-                        positiveButtonKey?.tr() ?? LocaleKeys.generalButtonOkay.tr(),
-                      ),
+                      child: Text(positiveButtonLabel),
                     ),
                   ],
                 ),
