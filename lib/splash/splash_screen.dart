@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: AppSize.s72,
-                  backgroundImage: AssetImage(ImageAsset.appLogo),
+                  backgroundImage: AssetImage(AppImage.appLogo),
                 ),
                 verticalMargin24,
                 CircularProgressIndicator.adaptive(

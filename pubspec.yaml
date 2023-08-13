@@ -68,6 +68,8 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
+    - assets/lotties/
   # FIXME: Only use for translaty
   # - translaty.yaml
   # - assets/translations/
