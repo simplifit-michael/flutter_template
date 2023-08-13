@@ -41,7 +41,7 @@ class LoadingScreen extends StatelessWidget {
                   child: SvgPicture.asset(
                     // ignore: lines_longer_than_80_chars
                     //FIXME: Replace Dummy Path with correct fallback loading SVG
-                    iconAsset ?? '/assets/images/loading.svg',
+                    iconAsset ?? AppImage.appLogo,
                     height: AppSize.s48,
                   ),
                 ),

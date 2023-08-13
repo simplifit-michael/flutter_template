@@ -1,9 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_template/app/assets/app_icon.dart';
 import 'package:flutter_template/shared/service/app_state/cubit/app_state_cubit.dart';
 
-import '../../app/assets/app_image.dart';
 import '../../app/themes/app_theme.dart';
 import '../../generated/app_margin.dart';
 import '../service/app_state/model/error/no_internet_error.dart';
@@ -40,12 +40,11 @@ class ConnectionMonitor extends StatelessWidget {
                 theme: AppTheme.getDefaultTheme(),
                 home: ErrorScreen(
                   data: ErrorScreenData(
-                    appIcon: AppImage.appLogo,
+                    appIcon: AppIcon.error,
                     description: error.getDescription(context),
                     positiveButtonLabel: error.getButtonLabel(context),
                     onPositiveTap: () async {
-                      final app = context.read<AppStateCubit>();
-                      app.setLoading();
+                      final app = context.read<AppStateCubit>()..setLoading();
                       await _connectivity.checkConnectivity();
                       app.reset();
                     },

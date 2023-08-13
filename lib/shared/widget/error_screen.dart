@@ -60,9 +60,7 @@ class ErrorScreen extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   data.appIcon,
-                  theme: const SvgTheme(
-                    currentColor: AppColor.error,
-                  ),
+                  theme: const SvgTheme(currentColor: AppColor.error),
                   height: AppSize.s120,
                 ),
                 verticalMargin8,
