@@ -1,0 +1,98 @@
+name: PROD - CD
+on:
+  push:
+    branches:
+      - master
+
+env:
+  flutter_version: "3.10.5"
+  java_version: "12"
+
+jobs:
+  run-tests:
+    name: Running Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.flutter_version}}
+          channel: "stable"
+          cache: true
+      - run: flutter pub get
+      - run: flutter test --coverage
+      - run: /usr/bin/sudo apt-get install -y lcov
+      - run: lcov --remove coverage/lcov.info '*.g.dart' '*.freezed.dart' 'lib/src/presentation/*' 'lib/main.dart' 'lib/firebase_options.dart' 'lib/src/shared/service/dependency_injection/*' -o coverage/lcov.info
+      - name: CD - Generate Test-Report
+        uses: zgosalvez/github-actions-report-lcov@v1
+        with:
+          coverage-files: coverage/lcov.info
+          minimum-coverage: 80
+          artifact-name: code-coverage-report
+          github-token: ${{ github.token }}
+          working-directory: .
+
+  build-and-deploy:
+    needs: [run-tests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Decrypt Signing Secrets
+        run: |
+          gpg --quiet --batch --yes --decrypt --passphrase="${{secrets.FILE_ENCRYPTION_PASSPHRASE}}" --output android/keystore/reservationmanager-keystore-pkcs12.jks android/keystore/prod-reservationmanager-keystore-pkcs12.jks.gpg
+          gpg --quiet --batch --yes --decrypt --passphrase="${{secrets.FILE_ENCRYPTION_PASSPHRASE}}" --output android/key.properties android/prod-key.properties.gpg
+      - uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: ${{env.java_version}}
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.flutter_version}}
+          channel: "stable"
+          cache: true
+      - name: Install dependencies
+        run: flutter pub get
+      - name: build App
+        run: |
+          build_number=$(git rev-list --count HEAD)
+          flutter build appbundle --release --flavor=PROD --dart-define=app.flavor=prod --build-number=$build_number
+      - name: Run read-yaml action
+        if: always()
+        id: yaml-data
+        uses: KJ002/read-yaml@main
+        with:
+          file: "./pubspec.yaml"
+          key-path: '["version"]'
+      - id: get-version
+        run: |
+          IN="${{ steps.yaml-data.outputs.data }}"
+          array=($(echo $IN | tr "+" "\n"))
+          echo '::set-output name=v::'${array[0]}
+          build_number=$(git rev-list --count HEAD)
+          echo '::set-output name=b::'${build_number}
+      - uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "${{ steps.get-version.outputs.v }}"
+          message: "Included Version Number"
+          force_push_tag: true
+      - uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_STORE_SERVICE_ACCOUNT }}
+          packageName: com.simplifit.reservationmanager
+          releaseFiles: build/app/outputs/bundle/release/app.aab
+          track: production
+          status: inProgress
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: reservationmanager
+          SLACK_ICON: https://www.simplifit-solutions.de/wp-content/uploads/2022/04/appIcon-300x300.png?size=48
+          SLACK_MESSAGE: "New PROD Release deployed :rocket:"
+          SLACK_TITLE: "[Reservation Manager] ${{ steps.get-version.outputs.v }}"
+          SLACK_WEBHOOK: ${{ secrets.SLACK_URL }}
