@@ -52,7 +52,12 @@ Future<void> runGoldenTest(
   }
 }
 
-String _getTestName(String groupName, String testName, String flowName, String flowIndex) {
+String _getTestName(
+  String groupName,
+  String testName,
+  String flowName,
+  String flowIndex,
+) {
   final fileName = flowName == '' ? testName : flowName;
   return "$groupName/$testName/$flowIndex$fileName";
 }

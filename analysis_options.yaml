@@ -11,12 +11,11 @@ analyzer:
     unnecessary_import: error
     missing_return: error
     always_declare_return_types: warning
-    close_sinks: ignore
+    close_sinks: warning
     missing_required_param: error
 
   exclude:
     - bricks/**
-    - test/**
     - lib/generated_plugin_registrant.dart
     - lib/generated/**
     - lib/**/*.g.dart
