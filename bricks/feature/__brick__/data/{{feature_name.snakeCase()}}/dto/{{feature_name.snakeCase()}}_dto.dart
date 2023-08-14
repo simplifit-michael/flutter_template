@@ -1,7 +1,7 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../../shared/model/base_dto.dart';
-import '../../domain/model/{{feature_name.snakeCase()}}.dart';
+import '../../../domain/{{feature_name.snakeCase()}}/model/{{feature_name.snakeCase()}}.dart';
 
 // ignore: unused_import
 import '../../../shared/hive_types.dart';

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_template/shared/extension/dio_extension.dart';
+import 'package:flutter_template/src/shared/extension/dio_extension.dart';
 
 import '../dto/{{feature_name.snakeCase()}}_dto.dart';
 import '../dto/request/add_{{feature_name.snakeCase()}}_request_body.dart';

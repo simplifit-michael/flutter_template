@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 
 import '../../../shared/error_handling/failures/failure.dart';
-import '../../domain/model/{{feature_name.snakeCase()}}.dart';
-import '../../domain/repository/{{feature_name.snakeCase()}}_repository.dart';
+import '../../../domain/{{feature_name.snakeCase()}}/model/{{feature_name.snakeCase()}}.dart';
+import '../../../domain/{{feature_name.snakeCase()}}/repository/{{feature_name.snakeCase()}}_repository.dart';
 
 class {{feature_name.pascalCase()}}RepositoryImpl extends {{feature_name.pascalCase()}}Repository{
   @override

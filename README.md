@@ -30,3 +30,15 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## Build a new Feature
+### Add the Brick
+```bash
+mason add feature --path bricks/feature 
+```
+
+### Use the Brick
+```bash
+mason make feature --feature_name my_feature --output-dir="lib/src" --on-conflict=overwrite
+```
