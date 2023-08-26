@@ -52,7 +52,11 @@ class _AppStateHandlerState extends State<AppStateHandler> {
   }
 
   void notifyUser() {
+    final isCurrent = ModalRoute.of(context)?.isCurrent ?? false;
+    if (!isCurrent) return;
+
     final cubit = context.read<AppStateCubit>();
+
     cubit.state.map(
       ready: (_) => null,
       loading: (_) => null,
